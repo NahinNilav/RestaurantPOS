@@ -416,7 +416,6 @@ public class mainFormController implements Initializable {
 
                     prepare.setString(7, path);
 
-                    // TO GET CURRENT DATE
                     Date date = new Date();
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
@@ -442,14 +441,15 @@ public class mainFormController implements Initializable {
 
     public void inventoryUpdateBtn() {
 
-        System.out.println("Product ID: " + inventory_productID.getText());
-        System.out.println("Product Name: " + inventory_productName.getText());
-        System.out.println("Selected Type: " + inventory_type.getSelectionModel().getSelectedItem());
-        System.out.println("Stock: " + inventory_stock.getText());
-        System.out.println("Price: " + inventory_price.getText());
-        System.out.println("Selected Status: " + inventory_status.getSelectionModel().getSelectedItem());
-        System.out.println("Data Path: " + Data.path);
-        System.out.println("Data ID: " + Data.id);
+          // Debug Statements
+//        System.out.println("Product ID: " + inventory_productID.getText());
+//        System.out.println("Product Name: " + inventory_productName.getText());
+//        System.out.println("Selected Type: " + inventory_type.getSelectionModel().getSelectedItem());
+//        System.out.println("Stock: " + inventory_stock.getText());
+//        System.out.println("Price: " + inventory_price.getText());
+//        System.out.println("Selected Status: " + inventory_status.getSelectionModel().getSelectedItem());
+//        System.out.println("Data Path: " + Data.path);
+//        System.out.println("Data ID: " + Data.id);
 
         if (inventory_productID.getText().isEmpty()
                 || inventory_productName.getText().isEmpty()
@@ -577,21 +577,7 @@ public class mainFormController implements Initializable {
 
     }
 
-//    public void inventoryImportBtn() {
-//
-//        FileChooser openFile = new FileChooser();
-//        //openFile.getExtensionFilters().add(new ExtensionFilter("Open Image File", "*png", "*jpg"));
-//
-//        File file = openFile.showOpenDialog(main_form.getScene().getWindow());
-//
-//        if (file != null) {
-//
-//            Data.path = file.getAbsolutePath();
-//            image = new Image(file.toURI().toString(), 120, 127, false, true);
-//
-//            inventory_imageView.setImage(image);
-//        }
-//    }
+
 
     public void inventoryImportBtn() {
         FileChooser fileChooser = new FileChooser();
@@ -610,7 +596,7 @@ public class mainFormController implements Initializable {
         }
     }
 
-    // MERGE ALL DATAS
+    // MERGE ALL DATA
     public ObservableList<CuisineData> inventoryDataList() {
 
         ObservableList<CuisineData> listData = FXCollections.observableArrayList();
@@ -1189,7 +1175,7 @@ public class mainFormController implements Initializable {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
 
-                stage.setTitle("Cafe Shop Management System");
+                stage.setTitle("Restaurant Management System");
 
                 stage.setScene(scene);
                 stage.show();

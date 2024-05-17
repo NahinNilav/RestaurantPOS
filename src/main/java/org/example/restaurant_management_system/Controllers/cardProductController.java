@@ -21,10 +21,9 @@ import org.example.restaurant_management_system.Model.CuisineData;
 import org.example.restaurant_management_system.Model.Data;
 import org.example.restaurant_management_system.Model.Database;
 
-/**
- *
- * @author WINDOWS 10
- */
+
+
+
 public class cardProductController implements Initializable {
 
     @FXML
