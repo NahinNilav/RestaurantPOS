@@ -4,28 +4,29 @@
 }
 .text
 {
-    -fx-font-family: "Poppins-Black";
+    -fx-font-family: "Poppins Black";
     -fx-text-fill: black;
 
 }
 .scroll-pane {
-    -fx-background-color: #e6cba0; /* Background color of the scroll pane */
-    -fx-padding: 0; /* Padding inside the scroll pane */
+    -fx-background-color: #e6cba0;
+    -fx-padding: 0;
 
-    /* Scrollbar colors */
+
     -fx-background: #e0e0e0;
+    -fx-background-radius: 10px;
 
 }
 
 .scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: #a39595; /* Thumb color */
-    -fx-background-radius: 5; /* Thumb border radius */
+    -fx-background-color: #a39595;
+    -fx-background-radius: 5;
 }
 .nav-form{
-    -fx-background-color: #eeefe9;
+    -fx-background-color: #111a27;
     -fx-text-alignment: center;
-    -fx-border-width: 0 3px 0 0;
-    -fx-border-color: #a1a1a1;
+
+
 }
 .nav-form2{
     -fx-background-color: #eeefe9;
@@ -34,28 +35,25 @@
     -fx-border-color: transparent;
 }
 .top-card{
-    -fx-font-family: "Poppins-Black";
+    -fx-font-family: "Poppins Black";
     -fx-text-fill: black;
-    -fx-background-color: #e9e8ec;
+    -fx-background-color: #111a27;
     -fx-text-alignment: center;
     -fx-background-radius: 20px;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 3 );
-    -fx-font-size: 15px;
+    -fx-font-size: 13px;
 
 }
-.top-card:hover
-{
-    -fx-background-color: #F8A374 ;
-}
+
 
 .top-card-writing
 {
     -fx-font-family: "Poppins Black";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 .text-signout
 {
-    -fx-font-family: "Poppins-Black";
+    -fx-font-family: "Poppins Black";
     -fx-text-fill: black;
     -fx-font-size: 15px;
 }
@@ -66,10 +64,11 @@
 }
 .nav-btn{
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins-Black";
-    -fx-text-fill: #393838;
+    -fx-font-family: "Poppins Black";
+    -fx-text-fill: white;
     -fx-background-color: transparent ;
-
+    -fx-border-color: white;
+    -fx-border-radius: 5px;
     -fx-pref-height: 5;
     -fx-alignment: Center;
     -fx-pref-width: 150;
@@ -78,9 +77,9 @@
 }
 .nav-btn:hover{
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins-Black";
-    -fx-text-fill: white;
-    -fx-background-color: #F8A374 ;
+    -fx-font-family: "Poppins Black";
+    -fx-text-fill: #111a27;
+    -fx-background-color: white ;
 
     -fx-pref-height: 5;
     -fx-alignment: Center;
@@ -105,7 +104,7 @@
 }
 
 .white-bg{
-    -fx-background-color: #eeefe9;
+    -fx-background-color: #f5f5f5;
 }
 
 .radius{
@@ -132,10 +131,10 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: #F8A374;
+    -fx-background-color:  #111a27;
     -fx-background-radius: 0px 0px 0 0;
     -fx-background-insets: 0 0 0 0;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+
 }
 .table-view .column-header, .filter{
     -fx-background-color: transparent;
@@ -147,8 +146,21 @@
     -fx-text-fill: #fff;
 }
 
+.table-row-cell:odd
+{
+    -fx-background-color: #f5f5f5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+
+}
+
+.table-row-cell:even
+{
+    -fx-background-color: #f5f5f5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+
 .btn{
-    -fx-background-color: #F8A374;
+    -fx-background-color: #111a27;
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-text-alignment: center;
@@ -161,10 +173,52 @@
 
 .input-fields
 {
-    -fx-font-family: "Poppins-Black";
+    -fx-font-family: "Poppins Black";
     -fx-border-style: none; /* Remove border */
     -fx-border-color: transparent; /* Make border color transparent */
     -fx-background-color: #fffefe;
     -fx-background-radius: 5px;
     -fx-text-fill: black;
+}
+
+.chart-bar
+{
+    -fx-background-color: transparent;
+    -fx-fill: linear-gradient(to bottom, #336699, #FFFFFF);
+}
+
+.default-color0.chart-bar
+{
+
+    -fx-width : 5px;
+    -fx-background-radius: 3px 3px 0 0;
+    -fx-background-color: #111a27;
+}
+.chart-legend
+{
+    -fx-background-color: #111a27;
+}
+.default-color0.chart-legend-item-symbol
+{ -fx-background-color:#111a27 ;}
+.default-color0.chart-series-line {
+    -fx-stroke: #111a27 ;
+    -fx-width : 5px;
+}
+.default-color0.chart-series-area-line {-fx-stroke:                 -chart0-color;}
+.default-color0.chart-series-area-fill {-fx-fill: #d4e9ff;}
+
+
+.glass
+{
+
+    -fx-background-color: rgba(255, 255, 255, 0.05); /* Adjust transparency as needed */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.5, 0, 0); /* Adjust blur and shadow color */
+    -fx-background-radius: 15px;
+}
+
+
+
+.image
+{
+    -fx-background-radius: 10px;
 }

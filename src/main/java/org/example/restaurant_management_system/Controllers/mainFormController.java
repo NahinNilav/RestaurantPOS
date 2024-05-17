@@ -1191,8 +1191,8 @@ public class mainFormController implements Initializable {
     // RETURNING NULL ISSUE FIX
     public void displayUsername() {
 
-        //String user = Data.username;
-        String user = "Admin";
+        String user = Data.username;
+        //String user = "Admin";
         user = user.substring(0, 1).toUpperCase() + user.substring(1);
 
         username.setText(user);
@@ -1202,7 +1202,7 @@ public class mainFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //displayUsername();
+        displayUsername();
 
         dashboardDisplayNC();
         dashboardDisplayTI();
