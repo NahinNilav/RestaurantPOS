@@ -1,0 +1,41 @@
+.background
+{
+    -fx-background-color: #EFEDED;
+    -fx-text-alignment: center;
+}
+
+.side-btn-background{
+    -fx-background-color: #DDDDDD ;
+    -fx-padding: 0px 20px;
+    -fx-spacing: 5;
+    -fx-alignment: top_left;
+}
+.side-btns
+{
+    -fx-start-margin: 2px;
+    -fx-font-family: "Poppins Black";
+    -fx-text-fill: #393838;
+    -fx-background-color: transparent ;
+
+    -fx-pref-height: 5;
+    -fx-alignment: Center;
+    -fx-pref-width: 150;
+    -fx-font-size: 15px;
+    -fx-background-radius: 5px;
+}
+
+
+.side-btns:hover
+{
+    -fx-start-margin: 2px;
+    -fx-font-family: "Poppins Black";
+    -fx-text-fill: white;
+    -fx-background-color: #F8A374 ;
+
+    -fx-pref-height: 5;
+    -fx-alignment: Center;
+    -fx-pref-width: 150;
+    -fx-font-size: 15px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 3 );
+}

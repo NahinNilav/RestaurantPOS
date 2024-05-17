@@ -1,0 +1,85 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 03 10, 23, 10:44:33 AM
+    Author     : WINDOWS 10
+*/
+
+.gradient{
+
+    -fx-background-image: url("../images/Login_page.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; /* Center the background image */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0); /* Optional: add a drop shadow */
+    -fx-transition: -fx-scale-x 10s, -fx-scale-y 10s;
+    -fx-border-radius: 25%;
+}
+
+.white-form{
+    -fx-background-color: #fff;
+}
+
+.head-label{
+    -fx-font-family: "Titan One";
+    -fx-border-color: #5D4FA1;
+    -fx-border-width: 0 0 0 0px;
+    -fx-padding: 0 0 0 5px;
+    -fx-text-fill: #5D4FA1;
+
+}
+
+.head-label2{
+    -fx-font-family: "Titan One";
+    -fx-border-color: #5D4FA1;
+    -fx-border-width: 0 0 0 0px;
+    -fx-padding: 0 0 0 5px;
+    -fx-text-fill: white;
+
+}
+
+.login-btn{
+    -fx-start-margin: 2px;
+    -fx-font-family: "Poppins Black";
+    -fx-text-fill: white;
+    -fx-background-color: #5D4FA1 ;
+
+    -fx-pref-height: 5;
+    -fx-alignment: Center;
+    -fx-pref-width: 225;
+    -fx-font-size: 15px;
+    -fx-background-radius: 5px;;
+}
+.login-btn:hover{
+    -fx-background-color: #453c77;
+
+    -fx-pref-height: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 3 );
+}
+
+.textfield{
+    -fx-font-family: "Poppins Black";
+    -fx-border-style: none; /* Remove border */
+    -fx-border-color: transparent; /* Make border color transparent */
+    -fx-background-color: #FFE6E6;
+    -fx-background-radius: 10px;
+}
+.textfield:focused{
+    -fx-border-width: 1px;
+}
+
+.create-btn{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-border-color: #fff;
+    -fx-border-width: 1px;
+}
+.create-btn:hover{
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
