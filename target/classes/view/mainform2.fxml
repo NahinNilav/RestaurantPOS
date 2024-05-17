@@ -38,12 +38,12 @@
                               <AnchorPane layoutX="22.0" layoutY="409.0" prefHeight="158.0" prefWidth="169.0" styleClass="glass">
                                  <children>
                                     <Button fx:id="logout_btn" layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="137.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Sign out" />
-                                              <Label layoutX="57.0" layoutY="21.0" text="Welcome, " textFill="WHITE">
+                                              <Label layoutX="57.0" layoutY="21.0" text="Welcome" textFill="WHITE">
                                                   <font>
                                                       <Font size="15.0" />
                                                   </font>
                                               </Label>
-                                              <Label fx:id="username" layoutX="51.0" layoutY="62.0" prefHeight="23.0" prefWidth="75.0" text="MarcoMan" textFill="WHITE">
+                                              <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="56.0" prefHeight="23.0" prefWidth="75.0" text="MarcoMan" textFill="WHITE">
                                                   <font>
                                                       <Font size="18.0" />
                                                   </font>

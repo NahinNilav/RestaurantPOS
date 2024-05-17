@@ -204,7 +204,7 @@
     -fx-stroke: #111a27 ;
     -fx-width : 5px;
 }
-.default-color0.chart-series-area-line {-fx-stroke:                 -chart0-color;}
+/*.default-color0.chart-series-area-line {-fx-stroke:                 -chart0-color;}*/
 .default-color0.chart-series-area-fill {-fx-fill: #d4e9ff;}
 
 

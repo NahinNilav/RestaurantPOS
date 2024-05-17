@@ -1170,7 +1170,7 @@ public class mainFormController implements Initializable {
                 logout_btn.getScene().getWindow().hide();
 
                 // LINK YOUR LOGIN FORM AND SHOW IT
-                Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
 
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
