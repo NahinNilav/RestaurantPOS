@@ -124,11 +124,12 @@
 
 
 }
-
+/*
 .table-row {
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 9, 0, 0, 0);
 }
+*/
 
 .table-view .column-header-background{
     -fx-background-color:  #111a27;
@@ -146,6 +147,7 @@
     -fx-text-fill: #fff;
 }
 
+/*
 .table-row-cell:odd
 {
     -fx-background-color: #f5f5f5;
@@ -158,6 +160,7 @@
     -fx-background-color: #f5f5f5;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
 }
+*/
 
 .btn{
     -fx-background-color: #111a27;
