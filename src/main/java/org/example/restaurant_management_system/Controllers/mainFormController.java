@@ -1226,6 +1226,11 @@ public class mainFormController implements Initializable {
         menuGetOrder();
         menuDisplayTotal();
         menuShowOrderData();
+        menu_tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                menuSelectOrder();
+            }
+        });
 
         customersShowData();
 
