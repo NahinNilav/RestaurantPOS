@@ -4,7 +4,7 @@
 }
 .text
 {
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: black;
 
 }
@@ -34,7 +34,7 @@
     -fx-border-color: transparent;
 }
 .top-card{
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: black;
     -fx-background-color: #e9e8ec;
     -fx-text-alignment: center;
@@ -55,7 +55,7 @@
 }
 .text-signout
 {
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: black;
     -fx-font-size: 15px;
 }
@@ -66,7 +66,7 @@
 }
 .nav-btn{
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: #393838;
     -fx-background-color: transparent ;
 
@@ -78,7 +78,7 @@
 }
 .nav-btn:hover{
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: white;
     -fx-background-color: #F8A374 ;
 
@@ -161,7 +161,7 @@
 
 .input-fields
 {
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-border-style: none; /* Remove border */
     -fx-border-color: transparent; /* Make border color transparent */
     -fx-background-color: #fffefe;

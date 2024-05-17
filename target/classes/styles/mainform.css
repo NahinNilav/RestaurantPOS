@@ -13,7 +13,7 @@
 .side-btns
 {
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: #393838;
     -fx-background-color: transparent ;
 
@@ -28,7 +28,7 @@
 .side-btns:hover
 {
     -fx-start-margin: 2px;
-    -fx-font-family: "Poppins Black";
+    -fx-font-family: "Poppins-Black";
     -fx-text-fill: white;
     -fx-background-color: #F8A374 ;
 
