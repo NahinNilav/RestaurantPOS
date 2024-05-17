@@ -1,7 +1,5 @@
 package org.example.restaurant_management_system.Controllers;
 
-// Card needed 753 754 lines
-
 
 import java.io.File;
 import java.io.InputStream;
@@ -443,6 +441,15 @@ public class mainFormController implements Initializable {
     }
 
     public void inventoryUpdateBtn() {
+
+        System.out.println("Product ID: " + inventory_productID.getText());
+        System.out.println("Product Name: " + inventory_productName.getText());
+        System.out.println("Selected Type: " + inventory_type.getSelectionModel().getSelectedItem());
+        System.out.println("Stock: " + inventory_stock.getText());
+        System.out.println("Price: " + inventory_price.getText());
+        System.out.println("Selected Status: " + inventory_status.getSelectionModel().getSelectedItem());
+        System.out.println("Data Path: " + Data.path);
+        System.out.println("Data ID: " + Data.id);
 
         if (inventory_productID.getText().isEmpty()
                 || inventory_productName.getText().isEmpty()
@@ -1221,6 +1228,13 @@ public class mainFormController implements Initializable {
         inventoryTypeList();
         inventoryStatusList();
         inventoryShowData();
+
+        inventory_tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                inventorySelectData();
+            }
+        });
+
 
         menuDisplayCard();
         menuGetOrder();
