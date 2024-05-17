@@ -1152,7 +1152,6 @@ public class mainFormController implements Initializable {
         }
 
     }
-// LETS PROCEED TO OUR DASHBOARD FORM : )
 
     public void logout() {
 
@@ -1188,7 +1187,6 @@ public class mainFormController implements Initializable {
 
     }
 
-    // RETURNING NULL ISSUE FIX
     public void displayUsername() {
 
         String user = Data.username;
