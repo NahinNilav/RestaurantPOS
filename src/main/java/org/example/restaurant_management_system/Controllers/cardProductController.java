@@ -89,6 +89,8 @@ public class cardProductController implements Initializable {
 
         mainFormController mForm = new mainFormController();
         mForm.customerID();
+        //CustomerController.customerID();
+
 
         qty = prod_spinner.getValue();
         String check = "";
@@ -194,6 +196,7 @@ public class cardProductController implements Initializable {
                     alert.setContentText("Successfully Added!");
                     alert.showAndWait();
 
+                    //mForm.menuShowOrderData();
                     mForm.menuGetTotal();
                 }
             }

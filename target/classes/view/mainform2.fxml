@@ -224,7 +224,7 @@
                               </Label>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="menu_form" layoutX="113.0" layoutY="181.0" prefHeight="600.0" prefWidth="878.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <AnchorPane fx:id="menu_form" layoutX="113.0" layoutY="181.0" prefHeight="600.0" prefWidth="878.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <AnchorPane layoutX="547.0" layoutY="52.0" prefHeight="534.0" prefWidth="320.0" styleClass="white-bg" stylesheets="@../styles/mainFromDesign.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="52.0">
                                             <children>
@@ -262,8 +262,7 @@
                                                     </font>
                                                 </Label>
                                                 <Button fx:id="menu_payBtn" layoutX="15.0" layoutY="420.0" mnemonicParsing="false" onAction="#menuPayBtn" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Pay" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                                                <Button fx:id="menu_removeBtn" layoutX="28.0" layoutY="489.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="41.0" prefWidth="119.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Remove" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
-                                                <Button fx:id="menu_receiptBtn" layoutX="173.0" layoutY="489.0" mnemonicParsing="false" onAction="#menuReceiptBtn" prefHeight="41.0" prefWidth="119.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Receipt" AnchorPane.bottomAnchor="36.0" AnchorPane.rightAnchor="28.0" />
+                                                <Button fx:id="menu_removeBtn" layoutX="15.0" layoutY="489.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Remove" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="15.0" />
                                     <Button fx:id="menu_amount_enter_btn" layoutX="213.0" layoutY="277.0" mnemonicParsing="false" onAction="#menuAmount" prefHeight="26.0" prefWidth="61.0" styleClass="btn" text="Enter" />
                                             </children>
                                         </AnchorPane>

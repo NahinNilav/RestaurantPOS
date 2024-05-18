@@ -2,7 +2,6 @@ package org.example.restaurant_management_system.Controllers;
 
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -42,15 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 import org.example.restaurant_management_system.Model.CuisineData;
 import org.example.restaurant_management_system.Model.CustomerData;
 import org.example.restaurant_management_system.Model.Data;
@@ -300,26 +290,29 @@ public class mainFormController implements Initializable {
         }
     }
 
-    public void dashboardNSP() {
 
-        String sql = "SELECT COUNT(quantity) FROM customer";
-
-        connect = (Connection) Database.connectDB();
+    public void dashboardTotalSoldProducts() {
+        String sql = "SELECT SUM(quantity) FROM customer";
 
         try {
-            int q = 0;
+            connect = Database.connectDB();
+            int totalQuantity = 0;
             prepare = connect.prepareStatement(sql);
             result = prepare.executeQuery();
 
             if (result.next()) {
-                q = result.getInt("COUNT(quantity)");
+                totalQuantity = result.getInt("SUM(quantity)");
             }
-            dashboard_NSP.setText(String.valueOf(q));
+            dashboard_NSP.setText(String.valueOf(totalQuantity));
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 
     public void dashboardIncomeChart() {
         dashboard_incomeChart.getData().clear();
@@ -337,7 +330,9 @@ public class mainFormController implements Initializable {
 
             dashboard_incomeChart.getData().add(chart);
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -358,7 +353,9 @@ public class mainFormController implements Initializable {
 
             dashboard_CustomerChart.getData().add(chart);
 
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -822,14 +819,16 @@ public class mainFormController implements Initializable {
     private int getid;
 
     public void menuSelectOrder() {
-        CuisineData prod = menu_tableView.getSelectionModel().getSelectedItem();
+
+        CuisineData cd = menu_tableView.getSelectionModel().getSelectedItem();
         int num = menu_tableView.getSelectionModel().getSelectedIndex();
 
         if ((num - 1) < -1) {
             return;
         }
-        // TO GET THE ID PER ORDER
-        getid = prod.getId();
+
+        // Get order id from selection
+        getid = cd.getId();
 
     }
 
@@ -938,6 +937,7 @@ public class mainFormController implements Initializable {
                         alert.showAndWait();
 
                         menuShowOrderData();
+                        menuRestart();
 
                     } else {
                         alert = new Alert(AlertType.WARNING);
@@ -963,9 +963,12 @@ public class mainFormController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please select the order you want to remove");
             alert.showAndWait();
-        } else {
+        }
+
+        else {
             String deleteData = "DELETE FROM customer WHERE id = " + getid;
             connect = (Connection) Database.connectDB();
+
             try {
                 alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation Message");
@@ -986,6 +989,7 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /*
     public void menuReceiptBtn() {
 
         if (totalP == 0 || menu_amount.getText().isEmpty()) {
@@ -1022,6 +1026,7 @@ public class mainFormController implements Initializable {
         }
 
     }
+    */
 
     public void menuRestart() {
         totalP = 0;
@@ -1033,6 +1038,8 @@ public class mainFormController implements Initializable {
     }
 
     private int cID;
+
+
 
     public void customerID() {
 
@@ -1109,6 +1116,11 @@ public class mainFormController implements Initializable {
         customers_tableView.setItems(customersListData);
     }
 
+
+
+    //public CustomerController custCont = new CustomerController();
+
+
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == dashboard_btn) {
@@ -1120,7 +1132,7 @@ public class mainFormController implements Initializable {
             dashboardDisplayNC();
             dashboardDisplayTI();
             dashboardTotalI();
-            dashboardNSP();
+            dashboardTotalSoldProducts();
             dashboardIncomeChart();
             dashboardCustomerChart();
 
@@ -1205,7 +1217,7 @@ public class mainFormController implements Initializable {
         dashboardDisplayNC();
         dashboardDisplayTI();
         dashboardTotalI();
-        dashboardNSP();
+        dashboardTotalSoldProducts();
         dashboardIncomeChart();
         dashboardCustomerChart();
 
@@ -1233,5 +1245,6 @@ public class mainFormController implements Initializable {
         customersShowData();
 
     }
+
 
 }
