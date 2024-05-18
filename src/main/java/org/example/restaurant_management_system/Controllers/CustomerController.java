@@ -15,31 +15,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class CustomerController {
+public abstract class CustomerController {
 
-    public static Connection connect;
-    public static PreparedStatement prepare;
+    public Connection connect;
+    public PreparedStatement prepare;
     public Statement statement;
-    public static ResultSet result;
+    public ResultSet result;
     @FXML
-    public static TableView<CustomerData> customers_tableView;
-
-    @FXML
-    public static TableColumn<CustomerData, String> customers_col_customerID;
+    public TableView<CustomerData> customers_tableView;
 
     @FXML
-    public static TableColumn<CustomerData, String> customers_col_total;
+    public TableColumn<CustomerData, String> customers_col_customerID;
 
     @FXML
-    public static TableColumn<CustomerData, String> customers_col_date;
+    public TableColumn<CustomerData, String> customers_col_total;
 
     @FXML
-    public static TableColumn<CustomerData, String> customers_col_cashier;
+    public TableColumn<CustomerData, String> customers_col_date;
+
+    @FXML
+    public TableColumn<CustomerData, String> customers_col_cashier;
 
 
-    private static int cID;
+    public int cID;
 
-    public static void customerID() {
+    public void customerID() {
 
         String sql = "SELECT MAX(customer_id) FROM customer";
         connect = (Connection) Database.connectDB();
@@ -73,7 +73,7 @@ public class CustomerController {
         }
     }
 
-    public static ObservableList<CustomerData> customersDataList() {
+    public ObservableList<CustomerData> customersDataList() {
 
         ObservableList<CustomerData> listData = FXCollections.observableArrayList();
         String sql = "SELECT * FROM receipt";
@@ -101,9 +101,9 @@ public class CustomerController {
         return listData;
     }
 
-    private static ObservableList<CustomerData> customersListData;
+    private ObservableList<CustomerData> customersListData;
 
-    public static void customersShowData() {
+    public void customersShowData() {
         customersListData = customersDataList();
 
         customers_col_customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
@@ -113,5 +113,6 @@ public class CustomerController {
 
         customers_tableView.setItems(customersListData);
     }
+
 
 }

@@ -142,7 +142,7 @@
                               </Label>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="inventory_form" layoutX="72.0" layoutY="200.0" prefHeight="600.0" prefWidth="878.0" stylesheets="@../styles/mainFromDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <AnchorPane fx:id="inventory_form" layoutX="72.0" layoutY="200.0" prefHeight="600.0" prefWidth="878.0" stylesheets="@../styles/mainFromDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <AnchorPane layoutX="14.0" layoutY="285.0" prefHeight="301.0" prefWidth="853.0" styleClass="white-bg" stylesheets="@../styles/mainFromDesign.css" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="285.0">
                                             <children>

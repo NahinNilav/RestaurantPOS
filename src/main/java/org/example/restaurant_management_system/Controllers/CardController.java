@@ -56,9 +56,9 @@ public class CardController implements Initializable {
 
     private Alert alert;
 
-    private int qty;
-    private double totalP;
-    private double pr;
+    private int quantity;
+    private double totalPrice;
+    private double price;
 
     private static final int MIN_QUANTITY = 0;
     private static final int MAX_QUANTITY = 100;
@@ -82,7 +82,7 @@ public class CardController implements Initializable {
         String path = "File:" + prodData.getImage();
         image = new Image(path, 190, 94, false, true);
         prod_imageView.setImage(image);
-        pr = prodData.getPrice();
+        price = prodData.getPrice();
     }
 
     private void setQuantity() {
@@ -92,9 +92,9 @@ public class CardController implements Initializable {
 
     @FXML
     public void addBtn() {
-        qty = prod_spinner.getValue();
+        quantity = prod_spinner.getValue();
 
-        if (qty == 0 || !isProductAvailable()) {
+        if (quantity == 0 || !isProductAvailable()) {
             showAlert(Alert.AlertType.ERROR, ERROR_TITLE, "Something Wrong :3");
             return;
         }
@@ -105,11 +105,11 @@ public class CardController implements Initializable {
             updateProductStatus("Unavailable", 0);
         }
 
-        if (checkStock < qty) {
+        if (checkStock < quantity) {
             showAlert(Alert.AlertType.ERROR, ERROR_TITLE, "Invalid. This product is Out of stock");
         } else {
             addProductToCustomer();
-            updateProductStock(checkStock - qty);
+            updateProductStock(checkStock - quantity);
             showAlert(Alert.AlertType.INFORMATION, INFO_TITLE, "Successfully Added!");
 
             // Assuming mainFormController.menuGetTotal() is a method to update total
@@ -162,7 +162,7 @@ public class CardController implements Initializable {
             prepare.setString(1, prod_name.getText());
             prepare.setString(2, type);
             prepare.setInt(3, stock);
-            prepare.setDouble(4, pr);
+            prepare.setDouble(4, price);
             prepare.setString(5, status);
             prepare.setString(6, prod_image);
             prepare.setString(7, prod_date);
@@ -183,10 +183,10 @@ public class CardController implements Initializable {
             prepare.setString(2, prodID);
             prepare.setString(3, prod_name.getText());
             prepare.setString(4, type);
-            prepare.setInt(5, qty);
+            prepare.setInt(5, quantity);
 
-            totalP = qty * pr;
-            prepare.setDouble(6, totalP);
+            totalPrice = quantity * price;
+            prepare.setDouble(6, totalPrice);
 
             Date date = new Date();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());

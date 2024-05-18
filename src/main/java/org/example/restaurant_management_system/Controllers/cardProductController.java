@@ -60,7 +60,7 @@ public class cardProductController implements Initializable {
 
     private Alert alert;
 
-    public void setData(CuisineData prodData) {
+    public void setDataToCards(CuisineData prodData) {
         this.prodData = prodData;
 
         prod_image = prodData.getImage();
@@ -72,18 +72,18 @@ public class cardProductController implements Initializable {
         String path = "File:" + prodData.getImage();
         image = new Image(path, 190, 94, false, true);
         prod_imageView.setImage(image);
-        pr = prodData.getPrice();
+        price = prodData.getPrice();
 
     }
-    private int qty;
+    private int quantity;
 
     public void setQuantity() {
         spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0);
         prod_spinner.setValueFactory(spin);
     }
 
-    private double totalP;
-    private double pr;
+    private double totalPrice;
+    private double price;
 
     public void addBtn() {
 
@@ -92,7 +92,7 @@ public class cardProductController implements Initializable {
         //CustomerController.customerID();
 
 
-        qty = prod_spinner.getValue();
+        quantity = prod_spinner.getValue();
         String check = "";
         String checkAvailable = "SELECT status FROM product WHERE prod_id = '"
                 + prodID + "'";
@@ -115,7 +115,7 @@ public class cardProductController implements Initializable {
 
                 String updateStock = "UPDATE product SET prod_name = '"
                         + prod_name.getText() + "', type = '"
-                        + type + "', stock = 0, price = " + pr
+                        + type + "', stock = 0, price = " + price
                         + ", status = 'Unavailable', image = '"
                         + prod_image + "', date = '"
                         + prod_date + "' WHERE prod_id = '"
@@ -132,7 +132,7 @@ public class cardProductController implements Initializable {
                 check = result.getString("status");
             }
 
-            if (!check.equals("Available") || qty == 0) {
+            if (!check.equals("Available") || quantity == 0) {
                 alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
@@ -140,7 +140,7 @@ public class cardProductController implements Initializable {
                 alert.showAndWait();
             } else {
 
-                if (checkStck < qty) {
+                if (checkStck < quantity) {
                     alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
@@ -157,10 +157,10 @@ public class cardProductController implements Initializable {
                     prepare.setString(2, prodID);
                     prepare.setString(3, prod_name.getText());
                     prepare.setString(4, type);
-                    prepare.setString(5, String.valueOf(qty));
+                    prepare.setString(5, String.valueOf(quantity));
 
-                    totalP = (qty * pr);
-                    prepare.setString(6, String.valueOf(totalP));
+                    totalPrice = (quantity * price);
+                    prepare.setString(6, String.valueOf(totalPrice));
 
                     Date date = new Date();
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -171,7 +171,7 @@ public class cardProductController implements Initializable {
 
                     prepare.executeUpdate();
 
-                    int upStock = checkStck - qty;
+                    int upStock = checkStck - quantity;
 
 
 
@@ -180,7 +180,7 @@ public class cardProductController implements Initializable {
 
                     String updateStock = "UPDATE product SET prod_name = '"
                             + prod_name.getText() + "', type = '"
-                            + type + "', stock = " + upStock + ", price = " + pr
+                            + type + "', stock = " + upStock + ", price = " + price
                             + ", status = '"
                             + check + "', image = '"
                             + prod_image + "', date = '"

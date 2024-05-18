@@ -47,7 +47,7 @@ import org.example.restaurant_management_system.Model.Data;
 import org.example.restaurant_management_system.Model.Database;
 
 
-public class mainFormController implements Initializable {
+public class mainFormController extends InventoryController implements Initializable {
 
     @FXML
     public AnchorPane main_form;
@@ -70,110 +70,114 @@ public class mainFormController implements Initializable {
     @FXML
     public Button logout_btn;
 
-    @FXML
-    public AnchorPane inventory_form;
+    // MOVED TO INVENTORYCONTROLLER
+//    @FXML
+//    public AnchorPane inventory_form;
+//
+//    @FXML
+//    public TableView<CuisineData> inventory_tableView;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_productID;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_productName;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_type;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_stock;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_price;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_status;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> inventory_col_date;
+//
+//    @FXML
+//    public ImageView inventory_imageView;
+//
+//    @FXML
+//    public Button inventory_importBtn;
+//
+//    @FXML
+//    public Button inventory_addBtn;
+//
+//    @FXML
+//    public Button inventory_updateBtn;
+//
+//    @FXML
+//    public Button inventory_clearBtn;
+//
+//    @FXML
+//    public Button inventory_deleteBtn;
+//
+//    @FXML
+//    public TextField inventory_productID;
+//
+//    @FXML
+//    public TextField inventory_productName;
+//
+//    @FXML
+//    public TextField inventory_stock;
+//
+//    @FXML
+//    public TextField inventory_price;
+//
+//    @FXML
+//    public ComboBox<?> inventory_status;
+//
+//    @FXML
+//    public ComboBox<?> inventory_type;
 
-    @FXML
-    public TableView<CuisineData> inventory_tableView;
+    // MOVED TO MENUCONTROLLER CLASS
+//    @FXML
+//    public AnchorPane menu_form;
+//
+//    @FXML
+//    public ScrollPane menu_scrollPane;
+//
+//    @FXML
+//    public GridPane menu_gridPane;
+//
+//    @FXML
+//    public TableView<CuisineData> menu_tableView;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> menu_col_productName;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> menu_col_quantity;
+//
+//    @FXML
+//    public TableColumn<CuisineData, String> menu_col_price;
+//
+//    @FXML
+//    public Label menu_total;
+//
+//    @FXML
+//    public TextField menu_amount;
+//
+//    @FXML
+//    public Button menu_amount_enter_btn;
+//
+//    @FXML
+//    public Label menu_change;
+//
+//    @FXML
+//    public Button menu_payBtn;
+//
+//    @FXML
+//    public Button menu_removeBtn;
+//
+//    @FXML
+//    public Button menu_receiptBtn;
 
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_productID;
 
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_productName;
-
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_type;
-
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_stock;
-
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_price;
-
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_status;
-
-    @FXML
-    public TableColumn<CuisineData, String> inventory_col_date;
-
-    @FXML
-    public ImageView inventory_imageView;
-
-    @FXML
-    public Button inventory_importBtn;
-
-    @FXML
-    public Button inventory_addBtn;
-
-    @FXML
-    public Button inventory_updateBtn;
-
-    @FXML
-    public Button inventory_clearBtn;
-
-    @FXML
-    public Button inventory_deleteBtn;
-
-    @FXML
-    public TextField inventory_productID;
-
-    @FXML
-    public TextField inventory_productName;
-
-    @FXML
-    public TextField inventory_stock;
-
-    @FXML
-    public TextField inventory_price;
-
-    @FXML
-    public ComboBox<?> inventory_status;
-
-    @FXML
-    public ComboBox<?> inventory_type;
-
-    @FXML
-    public AnchorPane menu_form;
-
-    @FXML
-    public ScrollPane menu_scrollPane;
-
-    @FXML
-    public GridPane menu_gridPane;
-
-    @FXML
-    public TableView<CuisineData> menu_tableView;
-
-    @FXML
-    public TableColumn<CuisineData, String> menu_col_productName;
-
-    @FXML
-    public TableColumn<CuisineData, String> menu_col_quantity;
-
-    @FXML
-    public TableColumn<CuisineData, String> menu_col_price;
-
-    @FXML
-    public Label menu_total;
-
-    @FXML
-    public TextField menu_amount;
-
-    @FXML
-    public Button menu_amount_enter_btn;
-
-    @FXML
-    public Label menu_change;
-
-    @FXML
-    public Button menu_payBtn;
-
-    @FXML
-    public Button menu_removeBtn;
-
-    @FXML
-    public Button menu_receiptBtn;
 
     @FXML
     public AnchorPane dashboard_form;
@@ -181,21 +185,24 @@ public class mainFormController implements Initializable {
     @FXML
     public AnchorPane customers_form;
 
-    @FXML
-    public TableView<CustomerData> customers_tableView;
 
-    @FXML
-    public TableColumn<CustomerData, String> customers_col_customerID;
+    //MOVED TO CUSTOMERCONTROLLER CLASS
+    //@FXML
+    //public TableView<CustomerData> customers_tableView;
 
-    @FXML
-    public TableColumn<CustomerData, String> customers_col_total;
+    //@FXML
+    //public TableColumn<CustomerData, String> customers_col_customerID;
 
-    @FXML
-    public TableColumn<CustomerData, String> customers_col_date;
+    //@FXML
+    //public TableColumn<CustomerData, String> customers_col_total;
 
-    @FXML
-    public TableColumn<CustomerData, String> customers_col_cashier;
+    //@FXML
+    //public TableColumn<CustomerData, String> customers_col_date;
 
+    //@FXML
+    //public TableColumn<CustomerData, String> customers_col_cashier;
+
+    //DashboardController dbct = new DashboardController();
     @FXML
     public Label dashboard_NC;
 
@@ -224,6 +231,9 @@ public class mainFormController implements Initializable {
     public Image image;
 
     public ObservableList<CuisineData> cardListData = FXCollections.observableArrayList();
+
+
+
 
     public void dashboardDisplayNC() {
 
@@ -360,6 +370,8 @@ public class mainFormController implements Initializable {
         }
     }
 
+    // MOVED TO INVENTORYCONTROLLER
+/*
     public void inventoryAddBtn() {
 
         if (inventory_productID.getText().isEmpty()
@@ -702,6 +714,10 @@ public class mainFormController implements Initializable {
 
     }
 
+ */
+
+    // MOVED TO MENUCONTROLLER CLASS
+    /*
     public ObservableList<CuisineData> menuGetData() {
 
         String sql = "SELECT * FROM product";
@@ -754,7 +770,7 @@ public class mainFormController implements Initializable {
                 load.setLocation(getClass().getResource("/view/cardProduct.fxml"));
                 AnchorPane pane = load.load();
                 cardProductController cardC = load.getController();
-                cardC.setData(cardListData.get(q));
+                cardC.setDataToCards(cardListData.get(q));
 
                 if (column == 3) {
                     column = 0;
@@ -832,7 +848,7 @@ public class mainFormController implements Initializable {
 
     }
 
-    private double totalP;
+    public double totalP;
 
     public void menuGetTotal() {
         customerID();
@@ -860,8 +876,8 @@ public class mainFormController implements Initializable {
         menu_total.setText("$" + totalP);
     }
 
-    private double amount;
-    private double change;
+    public double amount;
+    public double change;
 
     public void menuAmount() {
         menuGetTotal();
@@ -989,7 +1005,7 @@ public class mainFormController implements Initializable {
         }
     }
 
-    /*
+
     public void menuReceiptBtn() {
 
         if (totalP == 0 || menu_amount.getText().isEmpty()) {
@@ -1026,7 +1042,7 @@ public class mainFormController implements Initializable {
         }
 
     }
-    */
+
 
     public void menuRestart() {
         totalP = 0;
@@ -1036,11 +1052,12 @@ public class mainFormController implements Initializable {
         menu_amount.setText("");
         menu_change.setText("$0.0");
     }
+*/
 
-    private int cID;
+    // MOVED TO CUSTOMERCONTROLLER CLASS
+    //private int cID;
 
-
-
+/*
     public void customerID() {
 
         String sql = "SELECT MAX(customer_id) FROM customer";
@@ -1115,10 +1132,11 @@ public class mainFormController implements Initializable {
 
         customers_tableView.setItems(customersListData);
     }
-
+*/
 
 
     //public CustomerController custCont = new CustomerController();
+
 
 
     public void switchForm(ActionEvent event) {
@@ -1128,6 +1146,14 @@ public class mainFormController implements Initializable {
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
             customers_form.setVisible(false);
+
+//            dbct.dashboardDisplayNC();
+//            dbct.dashboardDisplayTI();
+//            dbct.dashboardTotalI();
+//            dbct.dashboardTotalSoldProducts();
+//            dbct.dashboardIncomeChart();
+//            dbct.dashboardCustomerChart();
+
 
             dashboardDisplayNC();
             dashboardDisplayTI();
@@ -1199,6 +1225,8 @@ public class mainFormController implements Initializable {
 
     }
 
+
+
     public void displayUsername() {
 
         String user = Data.username;
@@ -1213,6 +1241,13 @@ public class mainFormController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         displayUsername();
+
+//        dbct.dashboardDisplayNC();
+//        dbct.dashboardDisplayTI();
+//        dbct.dashboardTotalI();
+//        dbct.dashboardTotalSoldProducts();
+//        dbct.dashboardIncomeChart();
+//        dbct.dashboardCustomerChart();
 
         dashboardDisplayNC();
         dashboardDisplayTI();
