@@ -207,7 +207,7 @@ public class MainControllerCustomer implements Initializable {
 
     public ObservableList<CuisineData> cardListData = FXCollections.observableArrayList();
 
-    public void dashboardDisplayNC() {
+    public void dashboardDisplayTotalCustomers() {
 
         String sql = "SELECT COUNT(id) FROM receipt";
         connect = (Connection) Database.connectDB();
@@ -483,9 +483,7 @@ public class MainControllerCustomer implements Initializable {
                     alert.setContentText("Successfully Updated!");
                     alert.showAndWait();
 
-                    // TO UPDATE YOUR TABLE VIEW
                     inventoryShowData();
-                    // TO CLEAR YOUR FIELDS
                     inventoryClearBtn();
                 } else {
                     alert = new Alert(AlertType.ERROR);
@@ -529,9 +527,7 @@ public class MainControllerCustomer implements Initializable {
                     alert.setContentText("successfully Deleted!");
                     alert.showAndWait();
 
-                    // TO UPDATE YOUR TABLE VIEW
                     inventoryShowData();
-                    // TO CLEAR YOUR FIELDS
                     inventoryClearBtn();
 
                 } catch (Exception e) {
@@ -580,7 +576,7 @@ public class MainControllerCustomer implements Initializable {
         }
     }
 
-    // MERGE ALL DATA
+
     public ObservableList<CuisineData> inventoryDataList() {
 
         ObservableList<CuisineData> listData = FXCollections.observableArrayList();
@@ -814,7 +810,6 @@ public class MainControllerCustomer implements Initializable {
             return;
         }
 
-        // Get order id from selection
         getid = cd.getId();
 
     }
@@ -1085,10 +1080,9 @@ public class MainControllerCustomer implements Initializable {
 
             if (option.get().equals(ButtonType.OK)) {
 
-                // TO HIDE MAIN FORM
+
                 logout_btn.getScene().getWindow().hide();
 
-                // LINK YOUR LOGIN FORM AND SHOW IT
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Authentication.fxml"));
 
                 Stage stage = new Stage();
@@ -1137,7 +1131,7 @@ public class MainControllerCustomer implements Initializable {
 
         displayUsername();
 
-        dashboardDisplayNC();
+        dashboardDisplayTotalCustomers();
         dashboardDisplayTI();
         dashboardTotalI();
         dashboardTotalSoldProducts();
@@ -1164,6 +1158,7 @@ public class MainControllerCustomer implements Initializable {
                 menuSelectOrder();
             }
         });
+
 
         customersShowData();
 
