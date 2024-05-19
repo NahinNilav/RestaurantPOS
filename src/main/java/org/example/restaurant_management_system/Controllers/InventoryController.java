@@ -115,7 +115,7 @@ public abstract class InventoryController extends MenuController {
 
         } else {
 
-            // CHECK PRODUCT ID
+
             String checkProdID = "SELECT prod_id FROM product WHERE prod_id = '"
                     + inventory_productID.getText() + "'";
 
@@ -239,9 +239,9 @@ public abstract class InventoryController extends MenuController {
                     alert.setContentText("Successfully Updated!");
                     alert.showAndWait();
 
-                    // TO UPDATE YOUR TABLE VIEW
+
                     inventoryShowData();
-                    // TO CLEAR YOUR FIELDS
+
                     inventoryClearBtn();
                 } else {
                     alert = new Alert(AlertType.ERROR);
@@ -285,9 +285,9 @@ public abstract class InventoryController extends MenuController {
                     alert.setContentText("successfully Deleted!");
                     alert.showAndWait();
 
-                    // TO UPDATE YOUR TABLE VIEW
+
                     inventoryShowData();
-                    // TO CLEAR YOUR FIELDS
+
                     inventoryClearBtn();
 
                 } catch (Exception e) {
@@ -416,7 +416,7 @@ public abstract class InventoryController extends MenuController {
         inventory_imageView.setImage(image);
     }
 
-    private String[] typeList = {"Meals", "Drinks"};
+    private String[] typeList = {"Meals", "Drinks", "Platter", "Special"};
 
     public void inventoryTypeList() {
 

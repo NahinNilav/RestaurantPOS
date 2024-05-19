@@ -247,12 +247,10 @@ public class MainControllerAdmin extends InventoryController implements Initiali
         }
     }
 
-
-
     //public CustomerController custCont = new CustomerController();
 
-
     public void refreshMenu(ActionEvent event) {
+
         if (event.getSource() == menu_refresh_btn) {
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
@@ -262,6 +260,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
             menuDisplayCard();
             menuDisplayTotal();
             menuShowOrderData();
+
+            System.out.println("Menu refreshed");
         }
 
     }
@@ -269,6 +269,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == dashboard_btn) {
+
+            System.out.println("Dashboard button clicked.");
             dashboard_form.setVisible(true);
             inventory_form.setVisible(false);
             menu_form.setVisible(false);
@@ -282,6 +284,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
             dashboardCustomerChart();
 
         } else if (event.getSource() == inventory_btn) {
+
+            System.out.println("Inventory button clicked.");
             dashboard_form.setVisible(false);
             inventory_form.setVisible(true);
             menu_form.setVisible(false);
@@ -291,6 +295,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
             inventoryStatusList();
             inventoryShowData();
         } else if (event.getSource() == menu_btn) {
+
+            System.out.println("Menu button clicked.");
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(true);
@@ -300,6 +306,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
             menuDisplayTotal();
             menuShowOrderData();
         } else if (event.getSource() == customers_btn) {
+
+            System.out.println("Customers button clicked.");
             dashboard_form.setVisible(false);
             inventory_form.setVisible(false);
             menu_form.setVisible(false);

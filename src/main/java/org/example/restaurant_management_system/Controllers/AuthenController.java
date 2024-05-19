@@ -34,6 +34,22 @@ import org.example.restaurant_management_system.Model.Database;
 
 public class AuthenController implements Initializable {
 
+
+    @FXML
+    public AnchorPane side_form;
+
+    @FXML
+    public Button side_CreateBtn;
+
+    @FXML
+    public Button side_alreadyHave;
+
+    public Connection connect;
+    public PreparedStatement prepare;
+    public ResultSet result;
+
+    public Alert alert;
+
     @FXML
     public AnchorPane si_loginForm;
 
@@ -103,20 +119,6 @@ public class AuthenController implements Initializable {
     @FXML
     public Button np_back;
 
-    @FXML
-    public AnchorPane side_form;
-
-    @FXML
-    public Button side_CreateBtn;
-
-    @FXML
-    public Button side_alreadyHave;
-
-    public Connection connect;
-    public PreparedStatement prepare;
-    public ResultSet result;
-
-    public Alert alert;
 
 
 
@@ -124,6 +126,7 @@ public class AuthenController implements Initializable {
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty() ||
                 selectuser.getSelectionModel().getSelectedItem() == null) {
+            //System.out.println("One or more fields are empty.");
             alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -134,6 +137,8 @@ public class AuthenController implements Initializable {
         else {
             String selectData = "SELECT username, password, type FROM users WHERE username = ? and password = ?";
             connect = (Connection) Database.connectDB();
+            //System.out.println("Database connection established.");
+
 
             try {
                 prepare = connect.prepareStatement(selectData);
@@ -156,7 +161,7 @@ public class AuthenController implements Initializable {
                         alert.setContentText("Successfully Logged In!");
                         alert.showAndWait();
 
-                        // Load the appropriate main form based on role
+
                         String fxmlFile = (role.equals("Admin")) ? "/view/Admin.fxml" : "/view/Customer.fxml";
                         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 
@@ -198,6 +203,90 @@ public class AuthenController implements Initializable {
 
 
 
+
+
+
+
+    public void registerButton() {
+        if (su_username.getText().isEmpty() || su_password.getText().isEmpty()
+                || su_question.getSelectionModel().getSelectedItem() == null) {
+            //System.out.println("One or more fields are empty.");
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }
+
+        else {
+            String regData = "INSERT INTO users (username, password, type, date) "
+                    + "VALUES(?,?,?,?)";
+            connect = (Connection) Database.connectDB();
+            //System.out.println("Database connection established.");
+
+            try {
+                // RECORD PRESENT
+                String checkUsername = "SELECT username FROM users WHERE username = '"
+                        + su_username.getText() + "'";
+
+                prepare = connect.prepareStatement(checkUsername);
+                result = prepare.executeQuery();
+
+                if (result.next()) {
+                    alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText(su_username.getText() + " is already taken");
+                    alert.showAndWait();
+                } else if (su_password.getText().length() < 8) {
+                    alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Invalid Password, at least 8 characters are needed");
+                    alert.showAndWait();
+                } else {
+                    prepare = connect.prepareStatement(regData);
+                    prepare.setString(1, su_username.getText());
+                    prepare.setString(2, su_password.getText());
+                    prepare.setString(3, (String) su_question.getSelectionModel().getSelectedItem());
+
+                    Date date = new Date();
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    prepare.setString(4, String.valueOf(sqlDate));
+                    prepare.executeUpdate();
+                    System.out.println("User data inserted successfully.");
+
+                    alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Successfully registered Account!");
+                    alert.showAndWait();
+
+                    su_username.setText("");
+                    su_password.setText("");
+                    su_question.getSelectionModel().clearSelection();
+                    //System.out.println("Form fields cleared.");
+
+                    TranslateTransition slider = new TranslateTransition();
+                    slider.setNode(side_form);
+                    slider.setToX(0);
+                    slider.setDuration(Duration.seconds(.001));
+
+                    slider.setOnFinished((ActionEvent e) -> {
+                        side_alreadyHave.setVisible(false);
+                        side_CreateBtn.setVisible(true);
+                        //System.out.println("Slider animation finished.");
+                    });
+
+                    slider.play();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private String[] clientType = {"Admin", "Customer"};
 
     public void clientTypeList()
@@ -213,82 +302,7 @@ public class AuthenController implements Initializable {
 
     }
 
-
-
-    public void registerButton() {
-        if (su_username.getText().isEmpty() || su_password.getText().isEmpty()
-                || su_question.getSelectionModel().getSelectedItem() == null) {
-            alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill all blank fields");
-            alert.showAndWait();
-        } else {
-            String regData = "INSERT INTO users (username, password, type, date) "
-                    + "VALUES(?,?,?,?)";
-            connect = (Connection) Database.connectDB();
-
-            try {
-                // RECORD PRESENT
-                String checkUsername = "SELECT username FROM users WHERE username = '"
-                        + su_username.getText() + "'";
-
-                prepare = connect.prepareStatement(checkUsername);
-                result = prepare.executeQuery();
-
-                if (result.next()) {
-                    alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText(su_username.getText() + " is already taken");
-                    alert.showAndWait();
-                } else if (su_password.getText().length() < 8) {
-                    alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Invalid Password, at least 8 characters are needed");
-                    alert.showAndWait();
-                } else {
-                    prepare = connect.prepareStatement(regData);
-                    prepare.setString(1, su_username.getText());
-                    prepare.setString(2, su_password.getText());
-                    prepare.setString(3, (String) su_question.getSelectionModel().getSelectedItem());
-
-                    Date date = new Date();
-                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                    prepare.setString(4, String.valueOf(sqlDate));
-                    prepare.executeUpdate();
-
-                    alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully registered Account!");
-                    alert.showAndWait();
-
-                    su_username.setText("");
-                    su_password.setText("");
-                    su_question.getSelectionModel().clearSelection();
-
-                    TranslateTransition slider = new TranslateTransition();
-                    slider.setNode(side_form);
-                    slider.setToX(0);
-                    slider.setDuration(Duration.seconds(.5));
-
-                    slider.setOnFinished((ActionEvent e) -> {
-                        side_alreadyHave.setVisible(false);
-                        side_CreateBtn.setVisible(true);
-                    });
-
-                    slider.play();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    private String[] userTypeList = {"Employee", "Customer"};
+    private String[] userTypeList = {"Admin", "Customer"};
 
     public void userTypeListMethod() {
         List<String> listQ = new ArrayList<>();
@@ -301,13 +315,18 @@ public class AuthenController implements Initializable {
         su_question.setItems(listData);
     }
 
-    public void switchForgotPass() {
-        fp_questionForm.setVisible(true);
-        si_loginForm.setVisible(false);
-
-        forgotPassQuestionList();
+    public void backToLoginForm(){
+        si_loginForm.setVisible(true);
+        fp_questionForm.setVisible(false);
     }
 
+    public void backToQuestionForm(){
+        fp_questionForm.setVisible(true);
+        np_newPassForm.setVisible(false);
+    }
+
+
+/*
     public void proceedBtn() {
 
         if (fp_username.getText().isEmpty() || fp_question.getSelectionModel().getSelectedItem() == null
@@ -351,94 +370,8 @@ public class AuthenController implements Initializable {
         }
 
     }
+ */
 
-    public void changePassBtn() {
-
-        if (np_newPassword.getText().isEmpty() || np_confirmPassword.getText().isEmpty()) {
-            alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill all blank fields");
-            alert.showAndWait();
-        } else {
-
-            if (np_newPassword.getText().equals(np_confirmPassword.getText())) {
-                String getDate = "SELECT date FROM employee WHERE username = '"
-                        + fp_username.getText() + "'";
-
-                connect = (Connection) Database.connectDB();
-
-                try {
-
-                    prepare = connect.prepareStatement(getDate);
-                    result = prepare.executeQuery();
-
-                    String date = "";
-                    if (result.next()) {
-                        date = result.getString("date");
-                    }
-
-                    String updatePass = "UPDATE employee SET password = '"
-                            + np_newPassword.getText() + "', question = '"
-                            + fp_question.getSelectionModel().getSelectedItem() + "', answer = '"
-                            + fp_answer.getText() + "', date = '"
-                            + date + "' WHERE username = '"
-                            + fp_username.getText() + "'";
-
-                    prepare = connect.prepareStatement(updatePass);
-                    prepare.executeUpdate();
-
-                    alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully changed Password!");
-                    alert.showAndWait();
-
-                    si_loginForm.setVisible(true);
-                    np_newPassForm.setVisible(false);
-
-                    // TO CLEAR FIELDS
-                    np_confirmPassword.setText("");
-                    np_newPassword.setText("");
-                    fp_question.getSelectionModel().clearSelection();
-                    fp_answer.setText("");
-                    fp_username.setText("");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Not match");
-                alert.showAndWait();
-            }
-        }
-    }
-
-    public void forgotPassQuestionList() {
-
-        List<String> listQ = new ArrayList<>();
-
-        for (String data : userTypeList) {
-            listQ.add(data);
-        }
-
-        ObservableList listData = FXCollections.observableArrayList(listQ);
-        fp_question.setItems(listData);
-
-    }
-
-    public void backToLoginForm(){
-        si_loginForm.setVisible(true);
-        fp_questionForm.setVisible(false);
-    }
-
-    public void backToQuestionForm(){
-        fp_questionForm.setVisible(true);
-        np_newPassForm.setVisible(false);
-    }
 
     public void switchForm(ActionEvent event) {
 
@@ -483,10 +416,10 @@ public class AuthenController implements Initializable {
 
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         clientTypeList();
-
     }
 
 }

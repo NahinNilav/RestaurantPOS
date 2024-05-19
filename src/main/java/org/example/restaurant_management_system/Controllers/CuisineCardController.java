@@ -62,21 +62,9 @@ public class CuisineCardController implements Initializable {
 
     private Alert alert;
 
-    public void setDataToCards(CuisineData prodData) {
-        this.prodData = prodData;
 
-        prod_image = prodData.getImage();
-        prod_date = String.valueOf(prodData.getDate());
-        type = prodData.getType();
-        prodID = prodData.getCuisineId();
-        prod_name.setText(prodData.getCuisineName());
-        prod_price.setText("Tk " + String.valueOf(prodData.getPrice()));
-        String path = "File:" + prodData.getImage();
-        image = new Image(path, 190, 94, false, true);
-        prod_imageView.setImage(image);
-        price = prodData.getPrice();
 
-    }
+
     private int quantity;
 
     public void setQuantity() {
@@ -84,10 +72,34 @@ public class CuisineCardController implements Initializable {
         prod_spinner.setValueFactory(spin);
     }
 
+    public void setDataToCards(CuisineData prodData) {
+        this.prodData = prodData;
+
+        prod_image = prodData.getImage();
+        //System.out.println("Product image path: " + prod_image);
+
+        prod_date = String.valueOf(prodData.getDate());
+        type = prodData.getType();
+        prodID = prodData.getCuisineId();
+        prod_name.setText(prodData.getCuisineName());
+        prod_price.setText("Tk " + String.valueOf(prodData.getPrice()));
+        String path = "File:" + prodData.getImage();
+
+        image = new Image(path, 190, 94, false, true);
+        //System.out.println("Image object created with specified path and dimensions.");
+        prod_imageView.setImage(image);
+        price = prodData.getPrice();
+
+    }
+
+
     private double totalPrice;
     private double price;
 
     private ActionEvent event;
+
+
+
 
     public void addBtn() {
 
@@ -102,6 +114,7 @@ public class CuisineCardController implements Initializable {
                 + prodID + "'";
 
         connect = Database.connectDB();
+        //System.out.println("Database connection established.");
 
         try {
             int checkStck = 0;
@@ -126,6 +139,7 @@ public class CuisineCardController implements Initializable {
                         + prodID + "'";
                 prepare = connect.prepareStatement(updateStock);
                 prepare.executeUpdate();
+                System.out.println("Stock updated to 0 and status set to 'Unavailable'.");
 
             }
 
@@ -140,9 +154,12 @@ public class CuisineCardController implements Initializable {
                 alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
-                alert.setContentText("Something Wrong :3");
+                alert.setContentText("Something Went Wrong");
                 alert.showAndWait();
-            } else {
+                System.out.println("Product is not available or quantity is zero.");
+            }
+
+            else {
 
                 if (checkStck < quantity) {
                     alert = new Alert(AlertType.ERROR);
@@ -174,6 +191,7 @@ public class CuisineCardController implements Initializable {
                     prepare.setString(9, Data.username);
 
                     prepare.executeUpdate();
+                    System.out.println("Customer data inserted successfully.");
 
                     int upStock = checkStck - quantity;
 
@@ -193,6 +211,7 @@ public class CuisineCardController implements Initializable {
 
                     prepare = connect.prepareStatement(updateStock);
                     prepare.executeUpdate();
+                    System.out.println("Product stock and status updated successfully.");
 
                     alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Information Message");

@@ -24,7 +24,7 @@
                         <TextField fx:id="si_username" layoutX="63.0" layoutY="158.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
                         <PasswordField fx:id="si_password" layoutX="63.0" layoutY="204.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
                         <Button fx:id="si_loginBtn" layoutX="65.0" layoutY="270.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Login" />
-                        <Hyperlink fx:id="si_forgotPass" layoutX="65.0" layoutY="222.0" onAction="#switchForgotPass" text="Forgot Password?" visible="false" />
+                        <Hyperlink fx:id="si_forgotPass" layoutX="65.0" layoutY="222.0" text="Forgot Password?" visible="false" />
                   <ComboBox fx:id="selectuser" layoutX="65.0" layoutY="114.0" prefHeight="25.0" prefWidth="175.0" promptText=" Select Account Type" styleClass="account-select" />
                     </children>
                 </AnchorPane>
@@ -49,7 +49,7 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Button fx:id="fp_proceedBtn" layoutX="40.0" layoutY="256.0" mnemonicParsing="false" onAction="#proceedBtn" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Proceed" />
+                        <Button fx:id="fp_proceedBtn" layoutX="40.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Proceed" />
                         <TextField fx:id="fp_username" layoutX="40.0" layoutY="127.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
                         <ComboBox fx:id="fp_question" layoutX="40.0" layoutY="167.0" prefHeight="30.0" prefWidth="220.0" promptText="Question" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
                         <TextField fx:id="fp_answer" layoutX="40.0" layoutY="203.0" prefHeight="30.0" prefWidth="220.0" promptText="Answer" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
@@ -67,9 +67,9 @@
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <PasswordField fx:id="np_newPassword" layoutX="40.0" layoutY="148.0" onAction="#changePassBtn" prefHeight="30.0" prefWidth="220.0" promptText="New Password" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
-                        <PasswordField fx:id="np_confirmPassword" layoutX="40.0" layoutY="185.0" onAction="#changePassBtn" prefHeight="30.0" prefWidth="220.0" promptText="Confirmation Password" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
-                        <Button fx:id="np_changePassBtn" layoutX="40.0" layoutY="228.0" mnemonicParsing="false" onAction="#changePassBtn" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Change Password" />
+                        <PasswordField fx:id="np_newPassword" layoutX="40.0" layoutY="148.0" prefHeight="30.0" prefWidth="220.0" promptText="New Password" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
+                        <PasswordField fx:id="np_confirmPassword" layoutX="40.0" layoutY="185.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirmation Password" styleClass="textfield" stylesheets="@../styles/loginDesign.css" />
+                        <Button fx:id="np_changePassBtn" layoutX="40.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Change Password" />
                         <Button fx:id="np_back" layoutX="42.0" layoutY="355.0" mnemonicParsing="false" onAction="#backToQuestionForm" prefHeight="30.0" prefWidth="68.0" styleClass="login-btn" stylesheets="@../styles/loginDesign.css" text="Back">
                             <graphic>
 

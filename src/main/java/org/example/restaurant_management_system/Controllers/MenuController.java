@@ -2,6 +2,7 @@ package org.example.restaurant_management_system.Controllers;
 
 
 import java.sql.Connection;
+import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.Optional;
 import javafx.collections.FXCollections;
@@ -25,16 +26,9 @@ import org.example.restaurant_management_system.Model.CuisineData;
 import org.example.restaurant_management_system.Model.Data;
 import org.example.restaurant_management_system.Model.Database;
 
+
 public abstract class MenuController extends CustomerController {
 
-    @FXML
-    public AnchorPane menu_form;
-
-    @FXML
-    public ScrollPane menu_scrollPane;
-
-    @FXML
-    public GridPane menu_gridPane;
 
     @FXML
     public TableView<CuisineData> menu_tableView;
@@ -47,6 +41,16 @@ public abstract class MenuController extends CustomerController {
 
     @FXML
     public TableColumn<CuisineData, String> menu_col_price;
+
+    @FXML
+    public AnchorPane menu_form;
+
+    @FXML
+    public ScrollPane menu_scrollPane;
+
+    @FXML
+    public GridPane menu_gridPane;
+
 
     @FXML
     public Label menu_total;
@@ -110,6 +114,7 @@ public abstract class MenuController extends CustomerController {
 
         return listData;
     }
+
 
     public void menuDisplayCard() {
 
@@ -185,13 +190,18 @@ public abstract class MenuController extends CustomerController {
 
     public void menuShowOrderData() {
         menuOrderListData = menuGetOrder();
+        //System.out.println("Data retrieved from menuGetOrder: " + menuOrderListData);
 
         menu_col_productName.setCellValueFactory(new PropertyValueFactory<>("cuisineName"));
         menu_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         menu_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         menu_tableView.setItems(menuOrderListData);
+        //System.out.println("TableView items set with menuOrderListData.");
     }
+
+
+
     private int getid;
 
     public void menuSelectOrder() {
@@ -203,7 +213,6 @@ public abstract class MenuController extends CustomerController {
             return;
         }
 
-        // Get order id from selection
         getid = cd.getId();
 
     }
@@ -231,26 +240,27 @@ public abstract class MenuController extends CustomerController {
 
     }
 
-    public void menuDisplayTotal() {
-        menuGetTotal();
-        menu_total.setText("Tk" + totalP);
-    }
+
 
     public double amount;
     public double change;
 
     public void menuAmount() {
         menuGetTotal();
+        System.out.println("Total set in field");
 
         if (menu_amount.getText().isEmpty() || totalP == 0) {
             alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Message");
+            alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Invalid :3");
+            alert.setContentText("Invalid operation being attempted");
             alert.showAndWait();
-        } else {
+        }
+
+        else {
             amount = Double.parseDouble(menu_amount.getText());
             System.out.println("Amount text: " + amount); // Debugging output
+
             if (amount < totalP) {
                 menu_amount.setText("");
             } else {
@@ -259,6 +269,9 @@ public abstract class MenuController extends CustomerController {
             }
         }
     }
+
+
+
 
     public void menuPayBtn() {
 
@@ -302,6 +315,7 @@ public abstract class MenuController extends CustomerController {
                         prepare.setString(3, String.valueOf(sqlDate));
 
                         //prepare.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+                        //prepare.setDate(3, new java.sql.Date(System.currentTimeMillis()));
                         prepare.setString(4, Data.username);
 
                         prepare.executeUpdate();
@@ -344,6 +358,7 @@ public abstract class MenuController extends CustomerController {
         else {
             String deleteData = "DELETE FROM customer WHERE id = " + getid;
             connect = (Connection) Database.connectDB();
+            //System.out.println("Database connection established.");
 
             try {
                 alert = new Alert(AlertType.CONFIRMATION);
@@ -352,17 +367,33 @@ public abstract class MenuController extends CustomerController {
                 alert.setContentText("Are you sure you want to delete this order?");
                 Optional<ButtonType> option = alert.showAndWait();
 
+//                if (option.isPresent() && option.get().equals(ButtonType.OK)) {
+//                    System.out.println("User confirmed deletion. Proceeding with delete operation.");
+//                    prepare = connect.prepareStatement(deleteData);
+//                    prepare.executeUpdate();
+//                    System.out.println("Order deleted successfully. ID: " + getid);
+//                } else {
+//                    System.out.println("User cancelled deletion.");
+//                }
+
                 if (option.get().equals(ButtonType.OK)) {
                     prepare = connect.prepareStatement(deleteData);
                     prepare.executeUpdate();
                 }
 
                 menuShowOrderData();
+                System.out.println("Order data refreshed.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
+    }
+
+
+    public void menuDisplayTotal() {
+        menuGetTotal();
+        menu_total.setText("Tk" + totalP);
     }
 
 
@@ -373,5 +404,7 @@ public abstract class MenuController extends CustomerController {
         menu_total.setText("Tk 0.0");
         menu_amount.setText("");
         menu_change.setText("Tk 0.0");
+
+        System.out.println("Menu fields all reset");
     }
 }

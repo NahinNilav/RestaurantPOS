@@ -3,6 +3,7 @@ package org.example.restaurant_management_system.Model;
 import java.util.Date;
 
 public class CuisineData {
+
     public Integer id;
     public String cuisineId;
     public String cuisineName;
@@ -13,6 +14,17 @@ public class CuisineData {
     public String image;
     public Date date;
     public Integer quantity;
+
+
+    public CuisineData(Integer id, String cuisineId, String cuisineName,
+                       String type, Integer quantity, Double price){
+        this.id = id;
+        this.cuisineId = cuisineId;
+        this.cuisineName = cuisineName;
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public CuisineData(Integer id, String cuisineId,
                        String cuisineName, String type, Integer stock,
@@ -39,6 +51,7 @@ public class CuisineData {
         this.date = date;
         this.quantity = quantity;
     }
+
 
     public Integer getId() {
         return id;
