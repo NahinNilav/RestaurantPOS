@@ -23,7 +23,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +32,7 @@ import org.example.restaurant_management_system.Model.Data;
 import org.example.restaurant_management_system.Model.Database;
 
 
-public class FXMLDocumentController implements Initializable {
+public class AuthenController implements Initializable {
 
     @FXML
     public AnchorPane si_loginForm;
@@ -61,6 +60,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public ComboBox<?> su_question;
+
+    @FXML
+    public ComboBox<?> selectuser;
 
     @FXML
     public TextField su_answer;
@@ -116,88 +118,119 @@ public class FXMLDocumentController implements Initializable {
 
     public Alert alert;
 
-    public void loginBtn() {
 
-        if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
+
+
+    public void loginBtn() {
+        if (si_username.getText().isEmpty() || si_password.getText().isEmpty() ||
+                selectuser.getSelectionModel().getSelectedItem() == null) {
             alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Incorrect Username/Password");
+            alert.setContentText("Please enter Username/Password and select a user type.");
             alert.showAndWait();
-        } else {
+        }
 
-            String selctData = "SELECT username, password FROM employee WHERE username = ? and password = ?";
-
-            connect = (Connection)  Database.connectDB();
+        else {
+            String selectData = "SELECT username, password, type FROM users WHERE username = ? and password = ?";
+            connect = (Connection) Database.connectDB();
 
             try {
-
-                prepare = connect.prepareStatement(selctData);
+                prepare = connect.prepareStatement(selectData);
                 prepare.setString(1, si_username.getText());
                 prepare.setString(2, si_password.getText());
 
                 result = prepare.executeQuery();
-                // IF SUCCESSFULLY LOGIN, THEN PROCEED TO ANOTHER FORM WHICH IS OUR MAIN FORM 
+
                 if (result.next()) {
-                    // TO GET THE USERNAME THAT USER USED
-                    Data.username = si_username.getText();
+                    String role = result.getString("type");
+                    String selectedRole = selectuser.getSelectionModel().getSelectedItem().toString();
 
-                    alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Login!");
-                    alert.showAndWait();
+                    if (role.equals(selectedRole)) {
+                        // Successful login, set the username
+                        Data.username = si_username.getText();
 
-                    // LINK YOUR MAIN FORM
-                    Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm2.fxml"));
+                        alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Successfully Logged In!");
+                        alert.showAndWait();
 
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
+                        // Load the appropriate main form based on role
+                        String fxmlFile = (role.equals("Admin")) ? "/view/Admin.fxml" : "/view/Customer.fxml";
+                        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
 
-                    stage.setTitle("Restaurant Management System");
-                    stage.setMinWidth(1100);
-                    stage.setMinHeight(600);
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
 
-                    stage.setScene(scene);
-                    stage.show();
+                        stage.setTitle("Restaurant Management System");
+                        stage.setMinWidth(1100);
+                        stage.setMinHeight(600);
 
-                    si_loginBtn.getScene().getWindow().hide();
+                        stage.setScene(scene);
+                        stage.show();
 
-                } else { // IF NOT, THEN THE ERROR MESSAGE WILL APPEAR
+                        // Close
+                        si_loginBtn.getScene().getWindow().hide();
+                    }
+
+                    else {
+                        alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("User type does not match. Please select the correct user type.");
+                        alert.showAndWait();
+                    }
+                }
+
+                else {
                     alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Incorrect Username/Password");
+                    alert.setContentText("Incorrect Username/Password.");
                     alert.showAndWait();
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
+    }
+
+
+
+    private String[] clientType = {"Admin", "Customer"};
+
+    public void clientTypeList()
+    {
+        List<String> listQ = new ArrayList<>();
+
+        for (String data : clientType) {
+            listQ.add(data);
+        }
+
+        ObservableList listData = FXCollections.observableArrayList(listQ);
+        selectuser.setItems(listData);
 
     }
 
-    public void regBtn() {
 
+
+    public void registerButton() {
         if (su_username.getText().isEmpty() || su_password.getText().isEmpty()
-                || su_question.getSelectionModel().getSelectedItem() == null
-                || su_answer.getText().isEmpty()) {
+                || su_question.getSelectionModel().getSelectedItem() == null) {
             alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
             alert.setContentText("Please fill all blank fields");
             alert.showAndWait();
         } else {
-
-            String regData = "INSERT INTO employee (username, password, question, answer, date) "
-                    + "VALUES(?,?,?,?,?)";
+            String regData = "INSERT INTO users (username, password, type, date) "
+                    + "VALUES(?,?,?,?)";
             connect = (Connection) Database.connectDB();
 
             try {
-                // CHECK IF THE USERNAME IS ALREADY RECORDED
-                String checkUsername = "SELECT username FROM employee WHERE username = '"
+                // RECORD PRESENT
+                String checkUsername = "SELECT username FROM users WHERE username = '"
                         + su_username.getText() + "'";
 
                 prepare = connect.prepareStatement(checkUsername);
@@ -213,18 +246,17 @@ public class FXMLDocumentController implements Initializable {
                     alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Invalid Password, atleast 8 characters are needed");
+                    alert.setContentText("Invalid Password, at least 8 characters are needed");
                     alert.showAndWait();
                 } else {
                     prepare = connect.prepareStatement(regData);
                     prepare.setString(1, su_username.getText());
                     prepare.setString(2, su_password.getText());
                     prepare.setString(3, (String) su_question.getSelectionModel().getSelectedItem());
-                    prepare.setString(4, su_answer.getText());
 
                     Date date = new Date();
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                    prepare.setString(5, String.valueOf(sqlDate));
+                    prepare.setString(4, String.valueOf(sqlDate));
                     prepare.executeUpdate();
 
                     alert = new Alert(AlertType.INFORMATION);
@@ -236,10 +268,8 @@ public class FXMLDocumentController implements Initializable {
                     su_username.setText("");
                     su_password.setText("");
                     su_question.getSelectionModel().clearSelection();
-                    su_answer.setText("");
 
                     TranslateTransition slider = new TranslateTransition();
-
                     slider.setNode(side_form);
                     slider.setToX(0);
                     slider.setDuration(Duration.seconds(.5));
@@ -251,20 +281,19 @@ public class FXMLDocumentController implements Initializable {
 
                     slider.play();
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
 
-    private String[] questionList = {"What is your favorite Color?", "What is your favorite food?", "what is your birth date?"};
 
-    public void regLquestionList() {
+    private String[] userTypeList = {"Employee", "Customer"};
+
+    public void userTypeListMethod() {
         List<String> listQ = new ArrayList<>();
 
-        for (String data : questionList) {
+        for (String data : userTypeList) {
             listQ.add(data);
         }
 
@@ -392,7 +421,7 @@ public class FXMLDocumentController implements Initializable {
 
         List<String> listQ = new ArrayList<>();
 
-        for (String data : questionList) {
+        for (String data : userTypeList) {
             listQ.add(data);
         }
 
@@ -418,7 +447,7 @@ public class FXMLDocumentController implements Initializable {
         if (event.getSource() == side_CreateBtn) {
             slider.setNode(side_form);
             slider.setToX(300);
-            slider.setDuration(Duration.seconds(.5));
+            slider.setDuration(Duration.seconds(.001));
 
             slider.setOnFinished((ActionEvent e) -> {
                 side_alreadyHave.setVisible(true);
@@ -428,14 +457,14 @@ public class FXMLDocumentController implements Initializable {
                 si_loginForm.setVisible(true);
                 np_newPassForm.setVisible(false);
 
-                regLquestionList();
+                userTypeListMethod();
             });
 
             slider.play();
         } else if (event.getSource() == side_alreadyHave) {
             slider.setNode(side_form);
             slider.setToX(0);
-            slider.setDuration(Duration.seconds(.5));
+            slider.setDuration(Duration.seconds(.001));
 
             slider.setOnFinished((ActionEvent e) -> {
                 side_alreadyHave.setVisible(false);
@@ -444,15 +473,19 @@ public class FXMLDocumentController implements Initializable {
                 fp_questionForm.setVisible(false);
                 si_loginForm.setVisible(true);
                 np_newPassForm.setVisible(false);
+                //clientTypeList();
+
             });
 
             slider.play();
+
         }
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        clientTypeList();
 
     }
 

@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.restaurant_management_system.Controllers.mainFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.restaurant_management_system.Controllers.MainControllerAdmin">
     <children>
         <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -34,7 +34,7 @@
                                         <Button fx:id="dashboard_btn" layoutX="31.0" layoutY="120.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Dashboard" />
                                         <Button fx:id="inventory_btn" layoutX="32.0" layoutY="166.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Inventory" />
                                         <Button fx:id="menu_btn" layoutX="31.0" layoutY="216.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Menu" />
-                                        <Button fx:id="customers_btn" layoutX="31.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Customers" />
+                                        <Button fx:id="customers_btn" layoutX="31.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Transactions" />
                               <AnchorPane layoutX="22.0" layoutY="409.0" prefHeight="158.0" prefWidth="169.0" styleClass="glass">
                                  <children>
                                     <Button fx:id="logout_btn" layoutX="10.0" layoutY="103.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="137.0" styleClass="nav-btn" stylesheets="@../styles/mainFromDesign.css" text="Sign out" />
@@ -83,7 +83,7 @@
                                                               <Font size="15.0" />
                                                           </font>
                                                       </Label>
-                                                      <Label fx:id="dashboard_TI" alignment="CENTER_RIGHT" layoutX="98.0" layoutY="21.0" prefHeight="23.0" prefWidth="74.0" styleClass="top-card-writing" text="\$0.0">
+                                                      <Label fx:id="dashboard_TI" alignment="CENTER_RIGHT" layoutX="98.0" layoutY="21.0" prefHeight="23.0" prefWidth="74.0" styleClass="top-card-writing" text="Tk0.0">
                                                           <font>
                                                               <Font size="15.0" />
                                                           </font>
@@ -98,7 +98,7 @@
                                                               <Font size="15.0" />
                                                           </font>
                                                       </Label>
-                                                      <Label fx:id="dashboard_TotalI" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="26.0" prefHeight="23.0" prefWidth="74.0" styleClass="top-card-writing" text="\$0.0" textFill="WHITE">
+                                                      <Label fx:id="dashboard_TotalI" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="26.0" prefHeight="23.0" prefWidth="74.0" styleClass="top-card-writing" text="Tk0.0" textFill="WHITE">
                                                           <font>
                                                               <Font size="15.0" />
                                                           </font>
@@ -152,7 +152,7 @@
                                                         <TableColumn fx:id="inventory_col_productName" prefWidth="126.0" text="Product Name" />
                                                         <TableColumn fx:id="inventory_col_type" prefWidth="128.0" text="Type" />
                                                         <TableColumn fx:id="inventory_col_stock" prefWidth="93.0" text="Stock" />
-                                                        <TableColumn fx:id="inventory_col_price" prefWidth="100.0" text="Price" />
+                                                        <TableColumn fx:id="inventory_col_price" prefWidth="100.0" text="Price(Tk)" />
                                                         <TableColumn fx:id="inventory_col_status" prefWidth="121.0" text="Status" />
                                                         <TableColumn fx:id="inventory_col_date" prefWidth="121.0" text="Date" />
                                                     </columns>
@@ -188,12 +188,12 @@
                                                     </font>
                                                 </Label>
                                                 <TextField fx:id="inventory_stock" layoutX="432.0" layoutY="28.0" prefHeight="25.0" prefWidth="168.0" promptText="0" styleClass="input-fields" />
-                                                <Label layoutX="372.0" layoutY="70.0" text="Price ($):">
+                                                <Label layoutX="372.0" layoutY="70.0" text="Price (Tk):">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="inventory_price" layoutX="432.0" layoutY="68.0" prefHeight="25.0" prefWidth="168.0" promptText="\$0.0" styleClass="input-fields" />
+                                                <TextField fx:id="inventory_price" layoutX="432.0" layoutY="68.0" prefHeight="25.0" prefWidth="168.0" promptText="Tk0.0" styleClass="input-fields" />
                                                 <AnchorPane layoutX="707.0" layoutY="17.0" prefHeight="127.0" prefWidth="125.0" stylesheets="@../styles/mainFromDesign.css" AnchorPane.rightAnchor="23.0">
                                                     <styleClass>
                                                         <String fx:value="white-bg" />
@@ -232,7 +232,7 @@
                                                     <columns>
                                                         <TableColumn fx:id="menu_col_productName" prefWidth="115.0" text="Product Name" />
                                                         <TableColumn fx:id="menu_col_quantity" prefWidth="79.0" text="Quantity" />
-                                                        <TableColumn fx:id="menu_col_price" prefWidth="99.0" text="Price ($)" />
+                                                        <TableColumn fx:id="menu_col_price" prefWidth="99.0" text="Price (Tk)" />
                                                     </columns>
                                                 </TableView>
                                                 <Label layoutX="71.0" layoutY="285.0" prefHeight="17.0" prefWidth="49.0" text="Total: " AnchorPane.bottomAnchor="264.0" AnchorPane.rightAnchor="198.0">
@@ -240,7 +240,7 @@
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="menu_total" layoutX="126.0" layoutY="283.0" prefHeight="21.0" prefWidth="127.0" text="\$0.0" AnchorPane.bottomAnchor="262.0" AnchorPane.rightAnchor="67.0">
+                                                <Label fx:id="menu_total" layoutX="126.0" layoutY="283.0" prefHeight="21.0" prefWidth="127.0" text="Tk0.0" AnchorPane.bottomAnchor="262.0" AnchorPane.rightAnchor="67.0">
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
@@ -250,20 +250,21 @@
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="menu_amount" layoutX="126.0" layoutY="311.0" prefHeight="26.0" prefWidth="68.0" promptText="\$0.0" AnchorPane.bottomAnchor="229.0" AnchorPane.rightAnchor="126.0" />
+                                                <TextField fx:id="menu_amount" layoutX="126.0" layoutY="311.0" prefHeight="26.0" prefWidth="68.0" promptText="Tk0.0" AnchorPane.bottomAnchor="229.0" AnchorPane.rightAnchor="126.0" />
                                                 <Label layoutX="73.0" layoutY="345.0" text="Change:" AnchorPane.bottomAnchor="204.0" AnchorPane.rightAnchor="201.0">
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="menu_change" layoutX="126.0" layoutY="343.0" prefHeight="21.0" prefWidth="127.0" text="\$0.0" AnchorPane.bottomAnchor="202.0" AnchorPane.rightAnchor="67.0">
+                                                <Label fx:id="menu_change" layoutX="126.0" layoutY="343.0" prefHeight="21.0" prefWidth="127.0" text="Tk0.0" AnchorPane.bottomAnchor="202.0" AnchorPane.rightAnchor="67.0">
                                                     <font>
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <Button fx:id="menu_payBtn" layoutX="15.0" layoutY="420.0" mnemonicParsing="false" onAction="#menuPayBtn" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Pay" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                                                <Button fx:id="menu_payBtn" layoutX="16.0" layoutY="408.0" mnemonicParsing="false" onAction="#menuPayBtn" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Pay" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="14.0" />
                                                 <Button fx:id="menu_removeBtn" layoutX="15.0" layoutY="489.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Remove" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="15.0" />
                                     <Button fx:id="menu_amount_enter_btn" layoutX="213.0" layoutY="277.0" mnemonicParsing="false" onAction="#menuAmount" prefHeight="26.0" prefWidth="61.0" styleClass="btn" text="Enter" />
+                                    <Button fx:id="menu_refresh_btn" layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#refreshMenu" prefHeight="41.0" prefWidth="290.0" styleClass="btn" stylesheets="@../styles/mainFromDesign.css" text="Refresh" />
                                             </children>
                                         </AnchorPane>
                                           <ScrollPane fx:id="menu_scrollPane" layoutX="14.0" layoutY="48.0" prefHeight="542.0" prefWidth="533.0" styleClass="radius" stylesheets="@../styles/mainFromDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="48.0">
@@ -305,7 +306,7 @@
                                                 <TableView fx:id="customers_tableView" layoutX="18.0" layoutY="57.0" prefHeight="487.0" prefWidth="800.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="57.0">
                                                     <columns>
                                                         <TableColumn fx:id="customers_col_customerID" prefWidth="211.0" text="Customer ID" />
-                                                        <TableColumn fx:id="customers_col_total" prefWidth="241.0" text="Total ($)" />
+                                                        <TableColumn fx:id="customers_col_total" prefWidth="241.0" text="Total (Tk)" />
                                                         <TableColumn fx:id="customers_col_date" prefWidth="171.0" text="Date" />
                                                         <TableColumn fx:id="customers_col_cashier" prefWidth="175.0" text="Cashier" />
                                                     </columns>
@@ -315,7 +316,7 @@
                                                 </TableView>
                                             </children>
                                         </AnchorPane>
-                              <Label layoutX="31.0" layoutY="24.0" prefHeight="26.0" prefWidth="78.0" stylesheets="@../styles/mainFromDesign.css" text="Customers">
+                              <Label layoutX="31.0" layoutY="24.0" prefHeight="26.0" prefWidth="78.0" stylesheets="@../styles/mainFromDesign.css" text="Transactions">
                                  <font>
                                     <Font size="11.0" />
                                  </font>

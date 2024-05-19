@@ -83,3 +83,15 @@ and open the template in the editor.
     -fx-background-color: #fff;
     -fx-text-fill: #000;
 }
+
+.account-select
+{
+    -fx-background-color: #FFE6E6 ;
+
+    -fx-font-family: "Poppins Black";
+
+}
+.account-select .arrow
+{
+    -fx-background-color: #222222;
+}

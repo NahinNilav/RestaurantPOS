@@ -173,6 +173,8 @@ public abstract class InventoryController extends MenuController {
         }
     }
 
+
+
     public void inventoryUpdateBtn() {
 
         // Debug Statements
@@ -204,6 +206,9 @@ public abstract class InventoryController extends MenuController {
             String path = Data.path;
             path = path.replace("\\", "\\\\");
 
+            Date date = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
             String updateData = "UPDATE product SET "
                     + "prod_id = '" + inventory_productID.getText() + "', prod_name = '"
                     + inventory_productName.getText() + "', type = '"
@@ -212,7 +217,7 @@ public abstract class InventoryController extends MenuController {
                     + inventory_price.getText() + "', status = '"
                     + inventory_status.getSelectionModel().getSelectedItem() + "', image = '"
                     + path + "', date = '"
-                    + Data.date + "' WHERE id = " + Data.id;
+                    + sqlDate + "' WHERE id = " + Data.id;
 
             connect = (Connection) Database.connectDB();
 
@@ -250,6 +255,7 @@ public abstract class InventoryController extends MenuController {
             }
         }
     }
+
 
     public void inventoryDeleteBtn() {
         if (Data.id == 0) {
@@ -330,7 +336,7 @@ public abstract class InventoryController extends MenuController {
         }
     }
 
-    // MERGE ALL DATA
+
     public ObservableList<CuisineData> inventoryDataList() {
 
         ObservableList<CuisineData> listData = FXCollections.observableArrayList();
@@ -368,7 +374,7 @@ public abstract class InventoryController extends MenuController {
         return listData;
     }
 
-    // TO SHOW DATA ON OUR TABLE
+
     private ObservableList<CuisineData> inventoryListData;
 
     public void inventoryShowData() {
@@ -438,4 +444,5 @@ public abstract class InventoryController extends MenuController {
         inventory_status.setItems(listData);
 
     }
+
 }

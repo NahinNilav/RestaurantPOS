@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -24,7 +26,7 @@ import org.example.restaurant_management_system.Model.Database;
 
 
 
-public class cardProductController implements Initializable {
+public class CuisineCardController implements Initializable {
 
     @FXML
     private AnchorPane card_form;
@@ -68,7 +70,7 @@ public class cardProductController implements Initializable {
         type = prodData.getType();
         prodID = prodData.getCuisineId();
         prod_name.setText(prodData.getCuisineName());
-        prod_price.setText("$" + String.valueOf(prodData.getPrice()));
+        prod_price.setText("Tk " + String.valueOf(prodData.getPrice()));
         String path = "File:" + prodData.getImage();
         image = new Image(path, 190, 94, false, true);
         prod_imageView.setImage(image);
@@ -85,9 +87,11 @@ public class cardProductController implements Initializable {
     private double totalPrice;
     private double price;
 
+    private ActionEvent event;
+
     public void addBtn() {
 
-        mainFormController mForm = new mainFormController();
+        MainControllerAdmin mForm = new MainControllerAdmin();
         mForm.customerID();
         //CustomerController.customerID();
 
@@ -198,6 +202,7 @@ public class cardProductController implements Initializable {
 
                     //mForm.menuShowOrderData();
                     mForm.menuGetTotal();
+                    //mForm.switchForm(event);
                 }
             }
         } catch (Exception e) {

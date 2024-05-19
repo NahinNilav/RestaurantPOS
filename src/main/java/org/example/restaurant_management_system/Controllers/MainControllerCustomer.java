@@ -1,17 +1,6 @@
 package org.example.restaurant_management_system.Controllers;
 
 
-import java.io.File;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,16 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,8 +27,16 @@ import org.example.restaurant_management_system.Model.CustomerData;
 import org.example.restaurant_management_system.Model.Data;
 import org.example.restaurant_management_system.Model.Database;
 
+import java.io.File;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.*;
 
-public class mainFormController extends InventoryController implements Initializable {
+
+public class MainControllerCustomer implements Initializable {
 
     @FXML
     public AnchorPane main_form;
@@ -56,126 +45,115 @@ public class mainFormController extends InventoryController implements Initializ
     public Label username;
 
     @FXML
-    public Button dashboard_btn;
-
-    @FXML
-    public Button inventory_btn;
-
-    @FXML
     public Button menu_btn;
 
     @FXML
-    public Button customers_btn;
+    public Button menu_refresh_btn;
 
     @FXML
     public Button logout_btn;
 
-    // MOVED TO INVENTORYCONTROLLER
-//    @FXML
-//    public AnchorPane inventory_form;
-//
-//    @FXML
-//    public TableView<CuisineData> inventory_tableView;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_productID;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_productName;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_type;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_stock;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_price;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_status;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_date;
-//
-//    @FXML
-//    public ImageView inventory_imageView;
-//
-//    @FXML
-//    public Button inventory_importBtn;
-//
-//    @FXML
-//    public Button inventory_addBtn;
-//
-//    @FXML
-//    public Button inventory_updateBtn;
-//
-//    @FXML
-//    public Button inventory_clearBtn;
-//
-//    @FXML
-//    public Button inventory_deleteBtn;
-//
-//    @FXML
-//    public TextField inventory_productID;
-//
-//    @FXML
-//    public TextField inventory_productName;
-//
-//    @FXML
-//    public TextField inventory_stock;
-//
-//    @FXML
-//    public TextField inventory_price;
-//
-//    @FXML
-//    public ComboBox<?> inventory_status;
-//
-//    @FXML
-//    public ComboBox<?> inventory_type;
+    @FXML
+    public AnchorPane inventory_form;
 
-    // MOVED TO MENUCONTROLLER CLASS
-//    @FXML
-//    public AnchorPane menu_form;
-//
-//    @FXML
-//    public ScrollPane menu_scrollPane;
-//
-//    @FXML
-//    public GridPane menu_gridPane;
-//
-//    @FXML
-//    public TableView<CuisineData> menu_tableView;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_productName;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_quantity;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_price;
-//
-//    @FXML
-//    public Label menu_total;
-//
-//    @FXML
-//    public TextField menu_amount;
-//
-//    @FXML
-//    public Button menu_amount_enter_btn;
-//
-//    @FXML
-//    public Label menu_change;
-//
-//    @FXML
-//    public Button menu_payBtn;
-//
-//    @FXML
-//    public Button menu_removeBtn;
-//
-//    @FXML
-//    public Button menu_receiptBtn;
+    @FXML
+    public TableView<CuisineData> inventory_tableView;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_productID;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_productName;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_type;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_stock;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_price;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_status;
+
+    @FXML
+    public TableColumn<CuisineData, String> inventory_col_date;
+
+    @FXML
+    public ImageView inventory_imageView;
+
+    @FXML
+    public Button inventory_importBtn;
+
+    @FXML
+    public Button inventory_addBtn;
+
+    @FXML
+    public Button inventory_updateBtn;
+
+    @FXML
+    public Button inventory_clearBtn;
+
+    @FXML
+    public Button inventory_deleteBtn;
+
+    @FXML
+    public TextField inventory_productID;
+
+    @FXML
+    public TextField inventory_productName;
+
+    @FXML
+    public TextField inventory_stock;
+
+    @FXML
+    public TextField inventory_price;
+
+    @FXML
+    public ComboBox<?> inventory_status;
+
+    @FXML
+    public ComboBox<?> inventory_type;
+
+    @FXML
+    public AnchorPane menu_form;
+
+    @FXML
+    public ScrollPane menu_scrollPane;
+
+    @FXML
+    public GridPane menu_gridPane;
+
+    @FXML
+    public TableView<CuisineData> menu_tableView;
+
+    @FXML
+    public TableColumn<CuisineData, String> menu_col_productName;
+
+    @FXML
+    public TableColumn<CuisineData, String> menu_col_quantity;
+
+    @FXML
+    public TableColumn<CuisineData, String> menu_col_price;
+
+    @FXML
+    public Label menu_total;
+
+    @FXML
+    public TextField menu_amount;
+
+    @FXML
+    public Button menu_amount_enter_btn;
+
+    @FXML
+    public Label menu_change;
+
+    @FXML
+    public Button menu_payBtn;
+
+    @FXML
+    public Button menu_removeBtn;
 
 
 
@@ -185,24 +163,21 @@ public class mainFormController extends InventoryController implements Initializ
     @FXML
     public AnchorPane customers_form;
 
+    @FXML
+    public TableView<CustomerData> customers_tableView;
 
-    //MOVED TO CUSTOMERCONTROLLER CLASS
-    //@FXML
-    //public TableView<CustomerData> customers_tableView;
+    @FXML
+    public TableColumn<CustomerData, String> customers_col_customerID;
 
-    //@FXML
-    //public TableColumn<CustomerData, String> customers_col_customerID;
+    @FXML
+    public TableColumn<CustomerData, String> customers_col_total;
 
-    //@FXML
-    //public TableColumn<CustomerData, String> customers_col_total;
+    @FXML
+    public TableColumn<CustomerData, String> customers_col_date;
 
-    //@FXML
-    //public TableColumn<CustomerData, String> customers_col_date;
+    @FXML
+    public TableColumn<CustomerData, String> customers_col_cashier;
 
-    //@FXML
-    //public TableColumn<CustomerData, String> customers_col_cashier;
-
-    //DashboardController dbct = new DashboardController();
     @FXML
     public Label dashboard_NC;
 
@@ -231,9 +206,6 @@ public class mainFormController extends InventoryController implements Initializ
     public Image image;
 
     public ObservableList<CuisineData> cardListData = FXCollections.observableArrayList();
-
-
-
 
     public void dashboardDisplayNC() {
 
@@ -273,7 +245,7 @@ public class mainFormController extends InventoryController implements Initializ
                 ti = result.getDouble("SUM(total)");
             }
 
-            dashboard_TI.setText("$" + ti);
+            dashboard_TI.setText("Tk" + ti);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,7 +265,7 @@ public class mainFormController extends InventoryController implements Initializ
             if (result.next()) {
                 ti = result.getFloat("SUM(total)");
             }
-            dashboard_TotalI.setText("$" + ti);
+            dashboard_TotalI.setText("Tk" + ti);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -370,8 +342,6 @@ public class mainFormController extends InventoryController implements Initializ
         }
     }
 
-    // MOVED TO INVENTORYCONTROLLER
-/*
     public void inventoryAddBtn() {
 
         if (inventory_productID.getText().isEmpty()
@@ -448,9 +418,10 @@ public class mainFormController extends InventoryController implements Initializ
         }
     }
 
+
     public void inventoryUpdateBtn() {
 
-          // Debug Statements
+        // Debug Statements
 //        System.out.println("Product ID: " + inventory_productID.getText());
 //        System.out.println("Product Name: " + inventory_productName.getText());
 //        System.out.println("Selected Type: " + inventory_type.getSelectionModel().getSelectedItem());
@@ -479,6 +450,9 @@ public class mainFormController extends InventoryController implements Initializ
             String path = Data.path;
             path = path.replace("\\", "\\\\");
 
+            Date date = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
             String updateData = "UPDATE product SET "
                     + "prod_id = '" + inventory_productID.getText() + "', prod_name = '"
                     + inventory_productName.getText() + "', type = '"
@@ -487,7 +461,7 @@ public class mainFormController extends InventoryController implements Initializ
                     + inventory_price.getText() + "', status = '"
                     + inventory_status.getSelectionModel().getSelectedItem() + "', image = '"
                     + path + "', date = '"
-                    + Data.date + "' WHERE id = " + Data.id;
+                    + sqlDate + "' WHERE id = " + Data.id;
 
             connect = (Connection) Database.connectDB();
 
@@ -525,6 +499,7 @@ public class mainFormController extends InventoryController implements Initializ
             }
         }
     }
+
 
     public void inventoryDeleteBtn() {
         if (Data.id == 0) {
@@ -643,7 +618,7 @@ public class mainFormController extends InventoryController implements Initializ
         return listData;
     }
 
-    // TO SHOW DATA ON OUR TABLE
+
     private ObservableList<CuisineData> inventoryListData;
 
     public void inventoryShowData() {
@@ -714,10 +689,6 @@ public class mainFormController extends InventoryController implements Initializ
 
     }
 
- */
-
-    // MOVED TO MENUCONTROLLER CLASS
-    /*
     public ObservableList<CuisineData> menuGetData() {
 
         String sql = "SELECT * FROM product";
@@ -767,12 +738,12 @@ public class mainFormController extends InventoryController implements Initializ
 
             try {
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/view/cardProduct.fxml"));
+                load.setLocation(getClass().getResource("/view/CuisineCard.fxml"));
                 AnchorPane pane = load.load();
-                cardProductController cardC = load.getController();
+                CuisineCardController cardC = load.getController();
                 cardC.setDataToCards(cardListData.get(q));
 
-                if (column == 3) {
+                if (column == 2) {
                     column = 0;
                     row += 1;
                 }
@@ -848,7 +819,7 @@ public class mainFormController extends InventoryController implements Initializ
 
     }
 
-    public double totalP;
+    private double totalP;
 
     public void menuGetTotal() {
         customerID();
@@ -873,11 +844,11 @@ public class mainFormController extends InventoryController implements Initializ
 
     public void menuDisplayTotal() {
         menuGetTotal();
-        menu_total.setText("$" + totalP);
+        menu_total.setText("Tk" + totalP);
     }
 
-    public double amount;
-    public double change;
+    private double amount;
+    private double change;
 
     public void menuAmount() {
         menuGetTotal();
@@ -895,7 +866,7 @@ public class mainFormController extends InventoryController implements Initializ
                 menu_amount.setText("");
             } else {
                 change = (amount - totalP);
-                menu_change.setText("$" + change);
+                menu_change.setText("Tk" + change);
             }
         }
     }
@@ -921,7 +892,7 @@ public class mainFormController extends InventoryController implements Initializ
                     alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error Message");
                     alert.setHeaderText(null);
-                    alert.setContentText("Something wrong :3");
+                    alert.setContentText("Oops! Something has gone wrong");
                     alert.showAndWait();
                 } else {
                     alert = new Alert(AlertType.CONFIRMATION);
@@ -995,6 +966,7 @@ public class mainFormController extends InventoryController implements Initializ
                 if (option.get().equals(ButtonType.OK)) {
                     prepare = connect.prepareStatement(deleteData);
                     prepare.executeUpdate();
+                    menuRestart();
                 }
 
                 menuShowOrderData();
@@ -1006,58 +978,19 @@ public class mainFormController extends InventoryController implements Initializ
     }
 
 
-    public void menuReceiptBtn() {
-
-        if (totalP == 0 || menu_amount.getText().isEmpty()) {
-            alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setContentText("Please order first");
-            alert.showAndWait();
-        } else {
-            HashMap map = new HashMap();
-            map.put("getReceipt", (cID - 1));
-
-            try {
-
-                // Load the report.jrxml file from the resources/view directory
-                InputStream inputStream = getClass().getResourceAsStream("/view/report.jrxml");
-                if (inputStream == null) {
-                    // If the file is not found, display an error message
-                    System.out.println("report.jrxml file not found.");
-                    return;
-                }
-
-                JasperDesign jDesign = JRXmlLoader.load(inputStream);
-                JasperReport jReport = JasperCompileManager.compileReport(jDesign);
-                JasperPrint jPrint = JasperFillManager.fillReport(jReport, map, connect);
-
-                JasperViewer.viewReport(jPrint, false);
-
-                menuRestart();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
-
     public void menuRestart() {
         totalP = 0;
         change = 0;
         amount = 0;
-        menu_total.setText("$0.0");
+        menu_total.setText("Tk 0.0");
         menu_amount.setText("");
-        menu_change.setText("$0.0");
+        menu_change.setText("Tk 0.0");
     }
-*/
 
-    // MOVED TO CUSTOMERCONTROLLER CLASS
-    //private int cID;
+    private int cID;
 
-/*
+
+
     public void customerID() {
 
         String sql = "SELECT MAX(customer_id) FROM customer";
@@ -1132,71 +1065,20 @@ public class mainFormController extends InventoryController implements Initializ
 
         customers_tableView.setItems(customersListData);
     }
-*/
+
 
 
     //public CustomerController custCont = new CustomerController();
 
 
 
-    public void switchForm(ActionEvent event) {
-
-        if (event.getSource() == dashboard_btn) {
-            dashboard_form.setVisible(true);
-            inventory_form.setVisible(false);
-            menu_form.setVisible(false);
-            customers_form.setVisible(false);
-
-//            dbct.dashboardDisplayNC();
-//            dbct.dashboardDisplayTI();
-//            dbct.dashboardTotalI();
-//            dbct.dashboardTotalSoldProducts();
-//            dbct.dashboardIncomeChart();
-//            dbct.dashboardCustomerChart();
-
-
-            dashboardDisplayNC();
-            dashboardDisplayTI();
-            dashboardTotalI();
-            dashboardTotalSoldProducts();
-            dashboardIncomeChart();
-            dashboardCustomerChart();
-
-        } else if (event.getSource() == inventory_btn) {
-            dashboard_form.setVisible(false);
-            inventory_form.setVisible(true);
-            menu_form.setVisible(false);
-            customers_form.setVisible(false);
-
-            inventoryTypeList();
-            inventoryStatusList();
-            inventoryShowData();
-        } else if (event.getSource() == menu_btn) {
-            dashboard_form.setVisible(false);
-            inventory_form.setVisible(false);
-            menu_form.setVisible(true);
-            customers_form.setVisible(false);
-
-            menuDisplayCard();
-            menuDisplayTotal();
-            menuShowOrderData();
-        } else if (event.getSource() == customers_btn) {
-            dashboard_form.setVisible(false);
-            inventory_form.setVisible(false);
-            menu_form.setVisible(false);
-            customers_form.setVisible(true);
-
-            customersShowData();
-        }
-
-    }
 
     public void logout() {
 
         try {
 
             alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Error Message");
+            alert.setTitle("Confirmation Message");
             alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to logout?");
             Optional<ButtonType> option = alert.showAndWait();
@@ -1207,7 +1089,7 @@ public class mainFormController extends InventoryController implements Initializ
                 logout_btn.getScene().getWindow().hide();
 
                 // LINK YOUR LOGIN FORM AND SHOW IT
-                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/Authentication.fxml"));
 
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -1225,8 +1107,6 @@ public class mainFormController extends InventoryController implements Initializ
 
     }
 
-
-
     public void displayUsername() {
 
         String user = Data.username;
@@ -1237,17 +1117,25 @@ public class mainFormController extends InventoryController implements Initializ
 
     }
 
+
+    public void refreshMenu(ActionEvent event) {
+        if (event.getSource() == menu_refresh_btn) {
+            dashboard_form.setVisible(false);
+            inventory_form.setVisible(false);
+            menu_form.setVisible(true);
+            customers_form.setVisible(false);
+
+            menuDisplayCard();
+            menuDisplayTotal();
+            menuShowOrderData();
+        }
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         displayUsername();
-
-//        dbct.dashboardDisplayNC();
-//        dbct.dashboardDisplayTI();
-//        dbct.dashboardTotalI();
-//        dbct.dashboardTotalSoldProducts();
-//        dbct.dashboardIncomeChart();
-//        dbct.dashboardCustomerChart();
 
         dashboardDisplayNC();
         dashboardDisplayTI();

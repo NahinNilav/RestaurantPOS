@@ -127,12 +127,12 @@ public abstract class MenuController extends CustomerController {
 
             try {
                 FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("/view/cardProduct.fxml"));
+                load.setLocation(getClass().getResource("/view/CuisineCard.fxml"));
                 AnchorPane pane = load.load();
-                cardProductController cardC = load.getController();
+                CuisineCardController cardC = load.getController();
                 cardC.setDataToCards(cardListData.get(q));
 
-                if (column == 3) {
+                if (column == 2) {
                     column = 0;
                     row += 1;
                 }
@@ -233,7 +233,7 @@ public abstract class MenuController extends CustomerController {
 
     public void menuDisplayTotal() {
         menuGetTotal();
-        menu_total.setText("$" + totalP);
+        menu_total.setText("Tk" + totalP);
     }
 
     public double amount;
@@ -255,7 +255,7 @@ public abstract class MenuController extends CustomerController {
                 menu_amount.setText("");
             } else {
                 change = (amount - totalP);
-                menu_change.setText("$" + change);
+                menu_change.setText("Tk" + change);
             }
         }
     }
@@ -370,8 +370,8 @@ public abstract class MenuController extends CustomerController {
         totalP = 0;
         change = 0;
         amount = 0;
-        menu_total.setText("$0.0");
+        menu_total.setText("Tk 0.0");
         menu_amount.setText("");
-        menu_change.setText("$0.0");
+        menu_change.setText("Tk 0.0");
     }
 }
