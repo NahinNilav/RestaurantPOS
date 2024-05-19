@@ -65,66 +65,6 @@ public class MainControllerAdmin extends InventoryController implements Initiali
     @FXML
     public AnchorPane inventory_form;
 
-//    @FXML
-//    public TableView<CuisineData> inventory_tableView;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_productID;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_productName;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_type;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_stock;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_price;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_status;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> inventory_col_date;
-//
-//    @FXML
-//    public ImageView inventory_imageView;
-
-//    @FXML
-//    public Button inventory_importBtn;
-//
-//    @FXML
-//    public Button inventory_addBtn;
-//
-//    @FXML
-//    public Button inventory_updateBtn;
-//
-//    @FXML
-//    public Button inventory_clearBtn;
-//
-//    @FXML
-//    public Button inventory_deleteBtn;
-//
-//    @FXML
-//    public TextField inventory_productID;
-//
-//    @FXML
-//    public TextField inventory_productName;
-//
-//    @FXML
-//    public TextField inventory_stock;
-//
-//    @FXML
-//    public TextField inventory_price;
-//
-//    @FXML
-//    public ComboBox<?> inventory_status;
-//
-//    @FXML
-//    public ComboBox<?> inventory_type;
-
     @FXML
     public AnchorPane menu_form;
 
@@ -134,38 +74,6 @@ public class MainControllerAdmin extends InventoryController implements Initiali
     @FXML
     public GridPane menu_gridPane;
 
-//    @FXML
-//    public TableView<CuisineData> menu_tableView;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_productName;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_quantity;
-//
-//    @FXML
-//    public TableColumn<CuisineData, String> menu_col_price;
-//
-//    @FXML
-//    public Label menu_total;
-//
-//    @FXML
-//    public TextField menu_amount;
-//
-//    @FXML
-//    public Button menu_amount_enter_btn;
-//
-//    @FXML
-//    public Label menu_change;
-//
-//    @FXML
-//    public Button menu_payBtn;
-//
-//    @FXML
-//    public Button menu_removeBtn;
-//
-//    @FXML
-//    public Button menu_receiptBtn;
 
     @FXML
     public AnchorPane dashboard_form;
@@ -173,20 +81,7 @@ public class MainControllerAdmin extends InventoryController implements Initiali
     @FXML
     public AnchorPane customers_form;
 
-//    @FXML
-//    public TableView<CustomerData> customers_tableView;
-//
-//    @FXML
-//    public TableColumn<CustomerData, String> customers_col_customerID;
-//
-//    @FXML
-//    public TableColumn<CustomerData, String> customers_col_total;
-//
-//    @FXML
-//    public TableColumn<CustomerData, String> customers_col_date;
-//
-//    @FXML
-//    public TableColumn<CustomerData, String> customers_col_cashier;
+
 
     @FXML
     public Label dashboard_NC;
@@ -237,7 +132,7 @@ public class MainControllerAdmin extends InventoryController implements Initiali
 
     }
 
-    public void dashboardDisplayTI() {
+    public void dashboardDisplayDailyInc() {
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
@@ -262,7 +157,7 @@ public class MainControllerAdmin extends InventoryController implements Initiali
         }
     }
 
-    public void dashboardTotalI() {
+    public void dashboardTotalInc() {
         String sql = "SELECT SUM(total) FROM receipt";
 
         connect = (Connection) Database.connectDB();
@@ -380,8 +275,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
             customers_form.setVisible(false);
 
             dashboardDisplayNumCust();
-            dashboardDisplayTI();
-            dashboardTotalI();
+            dashboardDisplayDailyInc();
+            dashboardTotalInc();
             dashboardTotalSoldProducts();
             dashboardIncomeChart();
             dashboardCustomerChart();
@@ -463,8 +358,8 @@ public class MainControllerAdmin extends InventoryController implements Initiali
         displayUsername();
 
         dashboardDisplayNumCust();
-        dashboardDisplayTI();
-        dashboardTotalI();
+        dashboardDisplayDailyInc();
+        dashboardTotalInc();
         dashboardTotalSoldProducts();
         dashboardIncomeChart();
         dashboardCustomerChart();
@@ -493,6 +388,5 @@ public class MainControllerAdmin extends InventoryController implements Initiali
         customersShowData();
 
     }
-
 
 }
