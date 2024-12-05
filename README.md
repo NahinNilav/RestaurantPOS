@@ -1,4 +1,5 @@
 # restaurant_management_system
 
 
-This is a check to ensure git modification and access to push
+
+A Restaurant Management System using javaFX.
