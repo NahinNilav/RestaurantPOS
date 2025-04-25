@@ -28,19 +28,19 @@ This is the main dashboard view for logged-in restaurant staff, providing access
 
 ### Add Products
 
-![Add Products Interface](project_screenshots/AddProducts.jpg)
+![Add Products Interface](project_screenshots/AddProducts.png)
 
 This screenshot displays the interface used to add new products or menu items to the system's database.
 
 ### Employee Point of Sale (Checkout)
 
-![Employee Point of Sale](project_screenshots/EmployeePOS.jpg)
+![Employee Point of Sale](project_screenshots/EmployeePOS.png)
 
 This shows the Point of Sale interface used by employees to take customer orders and process payments.
 
 ### Customer Cloud Checkout / Ordering
 
-![Customer Cloud Interface](project_screenshots/CloudCustomer.jpg)
+![Customer Cloud Interface](project_screenshots/CloudCustomer.png)
 
 This screenshot illustrates the interface potentially used by customers for ordering or checkout in a cloud-based setup.
 
